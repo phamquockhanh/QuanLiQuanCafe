@@ -15,7 +15,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".BanHangActivity"></activity>
+        <activity android:name=".BanHangActivity" />
+        <activity android:name=".OrderActivity"></activity>
     </application>
 
 </manifest>

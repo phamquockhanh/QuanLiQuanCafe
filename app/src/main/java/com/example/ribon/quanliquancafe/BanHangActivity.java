@@ -1,12 +1,10 @@
 package com.example.ribon.quanliquancafe;
 
 import android.content.Intent;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 
 import org.askerov.dynamicgrid.DynamicGridView;
 
@@ -17,12 +15,13 @@ public class BanHangActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
     private DynamicGridView gridView;
     private String[] someTable= {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11",
-            "12","13","14","15"};
+            "12","13","14","15","16","17","18"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ban_hang);
+        setContentView(R.layout.
+                activity_ban_hang);
         gridView = (DynamicGridView) findViewById(R.id.dynamic_grid);
         ArrayList arrayList = new ArrayList<>(Arrays.asList(someTable));
 
@@ -40,14 +39,16 @@ public class BanHangActivity extends AppCompatActivity {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView parent, View view, int position, long id) {
-                new AlertDialog.Builder(BanHangActivity.this)
+                /*new AlertDialog.Builder(BanHangActivity.this)
                         .setTitle("Item information")
                         .setMessage("You clicked at position: " + position +"\n"
                                 + "The letter is: " + parent.getItemAtPosition(position).toString())
                         .setPositiveButton(android.R.string.yes, null)
 
                         .setIcon(android.R.drawable.ic_dialog_info)
-                        .show();
+                        .show();*/
+                Intent intent=new Intent(BanHangActivity.this,OrderActivity.class);
+                startActivity(intent);
             }
         });
 

@@ -38,7 +38,7 @@ public class GridViewAdapter extends BaseDynamicGridAdapter {
         private TextView letterText;
 
         private ViewHolder(View view) {
-            letterText = (TextView) view.findViewById(R.id.text);
+            letterText = (TextView) view.findViewById(R.id.tv_table);
         }
 
         void build(String title) {
