@@ -5,69 +5,128 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_weight="4"
     tools:context="com.example.ribon.quanliquancafe.MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_weight="4">
+        android:layout_weight="1">
+
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:id="@+id/bt_ban_hang"
-            android:text="ban hang"/>
+            android:background="#64DD17"
+            android:drawableTop="@drawable/sell_white"
+            android:paddingTop="20dp"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:text="Bán hàng" />
+
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            />
+            android:background="#CE93D8"
+            android:drawableTop="@drawable/quanlybep"
+            android:paddingTop="20dp"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:text="Quản lý bếp"
+            android:id="@+id/button4" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#42A5F5"
+            android:drawableTop="@drawable/thanhtoan"
+            android:paddingTop="20dp"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:text="Thanh toán nhanh"
+            android:id="@+id/button3" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Báo cáo"
+            android:background="#00E5FF"
+            android:drawableTop="@drawable/baocao"
+            android:paddingTop="20dp"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:id="@+id/button" />
 
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_weight="4">
+        android:layout_weight="1">
+
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:background="#FDD835"
+            android:drawableTop="@drawable/kho"
+            android:paddingTop="20dp"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:layout_weight="1"
+            android:id="@+id/button2"
+            android:text="Kho" />
+
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:background="#BDBDBD"
+            android:drawableTop="@drawable/thuchi"
+            android:paddingTop="20dp"
+            android:layout_weight="1"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:text="Thu chi" />
 
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_weight="4">
+        android:layout_weight="1">
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:background="#FF5722"
+            android:drawableTop="@drawable/caidat"
+            android:paddingTop="20dp"
+            android:layout_weight="1"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:text="Cài đặt" />
 
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_weight="4">
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:background="#5D4037"
+            android:drawableTop="@drawable/huongdan"
+            android:paddingTop="20dp"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:layout_weight="1"
+            android:text="Hướng dẫn" />
 
     </LinearLayout>
 </LinearLayout>
