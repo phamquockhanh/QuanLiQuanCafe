@@ -22,6 +22,9 @@ public class BanHangActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.
                 activity_ban_hang);
+
+        
+
         gridView = (DynamicGridView) findViewById(R.id.dynamic_grid);
         ArrayList arrayList = new ArrayList<>(Arrays.asList(someTable));
 
