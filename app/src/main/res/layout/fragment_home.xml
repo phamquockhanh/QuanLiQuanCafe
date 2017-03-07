@@ -1,13 +1,136 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="layout.HomeFragment">
+    android:layout_weight="4"
+    android:orientation="vertical"
+    >
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
 
-</FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/btn_sell"
+                android:background="#64DD17"
+                android:drawableTop="@drawable/ic_sell"
+                android:paddingTop="20dp"
+                android:textColor="#ffffff"
+                android:textSize="20sp"
+                android:text="Bán hàng" />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#CE93D8"
+                android:drawableTop="@drawable/ic_kitchen_manager"
+                android:paddingTop="20dp"
+                android:textColor="#ffffff"
+                android:textSize="20sp"
+                android:text="Quản lý bếp"
+                android:id="@+id/btn_kitchen_manager" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#42A5F5"
+                android:drawableTop="@drawable/ic_fast_payment"
+                android:paddingTop="20dp"
+                android:textColor="#ffffff"
+                android:textSize="20sp"
+                android:text="Thanh toán nhanh"
+                android:id="@+id/btn_fast_payment" />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Báo cáo"
+                android:background="#00E5FF"
+                android:drawableTop="@drawable/ic_report"
+                android:paddingTop="20dp"
+                android:textColor="#ffffff"
+                android:textSize="20sp"
+                android:id="@+id/btn_report" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="#FDD835"
+                android:drawableTop="@drawable/ic_repository"
+                android:paddingTop="20dp"
+                android:textColor="#ffffff"
+                android:textSize="20sp"
+                android:layout_weight="1"
+                android:id="@+id/btn_repository"
+                android:text="Kho" />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="#BDBDBD"
+                android:drawableTop="@drawable/ic_revenue_and_expenditure"
+                android:paddingTop="20dp"
+                android:layout_weight="1"
+                android:textColor="#ffffff"
+                android:textSize="20sp"
+                android:id="@+id/btn_revenue_and_expenditure"
+                android:text="Thu chi" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="#FF5722"
+                android:drawableTop="@drawable/ic_setting"
+                android:paddingTop="20dp"
+                android:layout_weight="1"
+                android:textColor="#ffffff"
+                android:textSize="20sp"
+                android:id="@+id/btn_setting"
+                android:text="Cài đặt" />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="#5D4037"
+                android:drawableTop="@drawable/ic_guide"
+                android:paddingTop="20dp"
+                android:textColor="#ffffff"
+                android:textSize="20sp"
+                android:layout_weight="1"
+                android:id="@+id/btn_guide"
+                android:text="Hướng dẫn" />
+
+        </LinearLayout>
+
+</LinearLayout>

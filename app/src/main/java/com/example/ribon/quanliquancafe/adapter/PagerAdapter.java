@@ -1,8 +1,11 @@
-package com.example.ribon.quanliquancafe;
+package com.example.ribon.quanliquancafe.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+
+import com.example.ribon.quanliquancafe.fragment.OrderedFragment;
+import com.example.ribon.quanliquancafe.fragment.OrderingFragment;
 
 /**
  * Created by Ribon on 05/03/2017.
