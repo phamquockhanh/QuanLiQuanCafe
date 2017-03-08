@@ -1,6 +1,17 @@
 <resources>
     <string name="app_name">QuanLiQuanCafe</string>
-
+    <array name="dummy_items">
+        <item>Bàn 1</item>
+        <item>Bàn 2</item>
+        <item>Bàn 3</item>
+        <item>Bàn 4</item>
+        <item>Bàn 5</item>
+        <item>Bàn 6</item>
+        <item>Bàn 7</item>
+        <item>Bàn 8</item>
+        <item>Bàn 9</item>
+        <item>Bàn 10</item>
+    </array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

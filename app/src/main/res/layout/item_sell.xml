@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item"
+    android:layout_width="match_parent"
+    android:layout_height="?listPreferredItemHeight"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?selectableItemBackground">
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/tv_table"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:fontFamily="monospace"
+        android:textSize="42sp"/>
+
+</FrameLayout>
