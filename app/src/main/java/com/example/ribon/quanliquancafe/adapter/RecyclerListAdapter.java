@@ -1,20 +1,22 @@
 package com.example.ribon.quanliquancafe.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.ribon.quanliquancafe.R;
+import com.example.ribon.quanliquancafe.activity.OrderActivity;
 import com.example.ribon.quanliquancafe.interfaces.ItemTouchHelperAdapter;
 import com.example.ribon.quanliquancafe.interfaces.ItemTouchHelperViewHolder;
+import com.example.ribon.quanliquancafe.model.Table;
 import com.example.ribon.quanliquancafe.util.ColorUtils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -24,13 +26,15 @@ import java.util.List;
 
 public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapter.ItemViewHolder>
         implements ItemTouchHelperAdapter {
-    private final List<String> mItems = new ArrayList<>();
+    private List<Table> mItems;
     private static int viewHolderCount;
+    Context context;
 
-    public RecyclerListAdapter(Context context) {
-        mItems.addAll(Arrays.asList(context.getResources().getStringArray(R.array.dummy_items)));
+    public RecyclerListAdapter(Context context, List<Table> mItems) {
+       // mItems.addAll(Arrays.asList(context.getResources().getStringArray(R.array.dummy_items)));
+        this.context=context;
+        this.mItems=mItems;
     }
-
     @Override
     public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_sell, parent, false);
@@ -44,9 +48,16 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
 
 
     @Override
-    public void onBindViewHolder(final ItemViewHolder holder, int position) {
-        holder.mTextViewTable.setText(mItems.get(position));
-
+    public void onBindViewHolder(final ItemViewHolder holder, final int position) {
+        Table item = mItems.get(position);
+        holder.mTableTextView.setText(item.getTableName());
+        holder.mTableTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(context, OrderActivity.class);
+                v.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -59,6 +70,15 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
     public boolean onItemMove(int fromPosition, int toPosition) {
         Collections.swap(mItems, fromPosition, toPosition);
         notifyItemMoved(fromPosition, toPosition);
+//        SharedPreferences pref = context.getSharedPreferences("luuPossition",Context.MODE_PRIVATE);
+//        SharedPreferences.Editor edt = pref.edit();
+//        List<String> list = new ArrayList<String>();
+//        for (int i=0;i<mItems.size();i++){
+//            list.add(toPosition+"");
+//        }
+//            edt.putInt("index", toPosition);
+//        Log.d("test",list+"");
+//        edt.commit();
         return true;
     }
 
@@ -67,14 +87,15 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
         return mItems.size();
     }
 
-    public static class ItemViewHolder extends RecyclerView.ViewHolder implements
+    public class ItemViewHolder extends RecyclerView.ViewHolder implements
             ItemTouchHelperViewHolder {
 
-        public final TextView mTextViewTable;
+        public final TextView mTableTextView;
+        /*@Bind(R.id.tv_table) TextView mTableTextView;*/
 
         public ItemViewHolder(View itemView) {
             super(itemView);
-            mTextViewTable = (TextView) itemView.findViewById(R.id.tv_table);
+            mTableTextView = (TextView) itemView.findViewById(R.id.tv_table);
         }
 
         @Override
@@ -87,5 +108,8 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
         public void onItemClear() {
             itemView.setBackgroundColor(0);
         }
+
+
+
     }
 }
