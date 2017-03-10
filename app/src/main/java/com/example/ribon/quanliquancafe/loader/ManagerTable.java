@@ -142,6 +142,9 @@ public class ManagerTable extends SQLiteOpenHelper {
     }
 
 
+    public void insertData(){
+        
+    }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

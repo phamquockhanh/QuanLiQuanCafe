@@ -39,10 +39,10 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
     public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_sell, parent, false);
         ItemViewHolder itemViewHolder = new ItemViewHolder(view);
-        int backgroundColorForViewHolder = ColorUtils.getViewHolderBackgroundColorFromInstance(parent.getContext(),viewHolderCount);
+       /* int backgroundColorForViewHolder = ColorUtils.getViewHolderBackgroundColorFromInstance(parent.getContext(),viewHolderCount);
         itemViewHolder.itemView.setBackgroundColor(backgroundColorForViewHolder);
 
-        viewHolderCount++;
+        viewHolderCount++;*/
         return itemViewHolder;
     }
 

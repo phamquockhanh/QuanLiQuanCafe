@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_sell"
+            android:icon="@drawable/ic_sell"
+            android:title="Bán hàng" />
+        <item
+            android:id="@+id/nav_cook"
+            android:icon="@drawable/ic_cook"
+            android:title="Quản lý bếp" />
+        <item
+            android:id="@+id/nav_fast_payment"
+            android:icon="@drawable/ic_fast_payment"
+            android:title="Thanh toán nhanh" />
+        <item
+            android:id="@+id/ic_revenue_and_expenditure"
+            android:icon="@drawable/ic_revenue_and_expenditure"
+            android:title="Thu chi" />
+        <item
+            android:id="@+id/nav_report"
+            android:icon="@drawable/ic_report"
+            android:title="Báo cáo" />
+        <item
+            android:id="@+id/nav_repository"
+            android:icon="@drawable/ic_repository"
+            android:title="Kho" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+
+
+        </menu>
+    </item>
+
+</menu>

@@ -15,7 +15,7 @@ public class FragmentUtils {
     public static void replaceFragment(FragmentManager manager, Fragment fragment, boolean addBackStack){
         if(fragment == null || manager == null) return;
         FragmentTransaction transaction = manager.beginTransaction()
-                .replace(R.id.activity_main, fragment);
+                .replace(R.id.content_main, fragment);
         if(addBackStack){
             transaction.addToBackStack(null);
         }

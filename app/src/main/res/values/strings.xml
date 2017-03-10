@@ -1,17 +1,9 @@
 <resources>
     <string name="app_name">QuanLiQuanCafe</string>
-    <array name="dummy_items">
-        <item>Bàn 1</item>
-        <item>Bàn 2</item>
-        <item>Bàn 3</item>
-        <item>Bàn 4</item>
-        <item>Bàn 5</item>
-        <item>Bàn 6</item>
-        <item>Bàn 7</item>
-        <item>Bàn 8</item>
-        <item>Bàn 9</item>
-        <item>Bàn 10</item>
-    </array>
+    <string name="plus_talbe">Thêm bàn</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="action_insert">Thêm bàn</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>

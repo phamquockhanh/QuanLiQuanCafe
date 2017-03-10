@@ -1,17 +1,19 @@
 package com.example.ribon.quanliquancafe.fragment;
 
-import android.content.Intent;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
 import com.example.ribon.quanliquancafe.R;
-import com.example.ribon.quanliquancafe.activity.OrderActivity;
 import com.example.ribon.quanliquancafe.adapter.RecyclerListAdapter;
 import com.example.ribon.quanliquancafe.common.BaseFragment;
 import com.example.ribon.quanliquancafe.common.SimpleItemTouchHelperCallback;
@@ -30,6 +32,8 @@ import butterknife.Bind;
 
 public class SellFragment extends BaseFragment  {
     @Bind(R.id.recycler_view) RecyclerView mRecyclerView;
+    /*@Bind(R.id.toolbar)
+    Toolbar mSellToolbar;*/
     private ItemTouchHelper mItemTouchHelper;
     List<Table> list;
     RecyclerListAdapter adapter;
@@ -42,7 +46,11 @@ public class SellFragment extends BaseFragment  {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        setHasOptionsMenu(true);
         connectDatabase();
+        managerTable=new ManagerTable(getActivity());
+        list = new ArrayList<Table>();
+        list= managerTable.tableList();
 
         adapter = new RecyclerListAdapter(getActivity(),list);
         adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
@@ -89,11 +97,17 @@ public class SellFragment extends BaseFragment  {
         managerTable = new ManagerTable(getActivity());
         try {
             managerTable.createDataBase();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
-        list = new ArrayList<Table>();
-        list= managerTable.tableList();
+        managerTable.close();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.main,menu);
     }
 
     @Override
@@ -113,4 +127,24 @@ public class SellFragment extends BaseFragment  {
 
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+       /* ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);*/
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+       /* if(id==android.R.id.home){
+            getActivity().getSupportFragmentManager().popBackStack();
+            Toast.makeText(getActivity(), "back", Toast.LENGTH_SHORT).show();
+        }*/
+        if (id== R.id.action_settings)
+        {
+            Toast.makeText(getActivity(), "Thêm bàn", Toast.LENGTH_SHORT).show();
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
