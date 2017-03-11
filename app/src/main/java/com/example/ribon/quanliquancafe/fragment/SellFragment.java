@@ -1,9 +1,9 @@
 package com.example.ribon.quanliquancafe.fragment;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -11,7 +11,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.example.ribon.quanliquancafe.R;
 import com.example.ribon.quanliquancafe.adapter.RecyclerListAdapter;
@@ -32,8 +33,11 @@ import butterknife.Bind;
 
 public class SellFragment extends BaseFragment  {
     @Bind(R.id.recycler_view) RecyclerView mRecyclerView;
-    /*@Bind(R.id.toolbar)
-    Toolbar mSellToolbar;*/
+    /*@Bind(R.id.edt_plus)EditText mEdtPlus;
+    @Bind(R.id.btn_ok)Button mBtnOK;
+    @Bind(R.id.btn_cancel)Button mBtnCancel;*/
+
+
     private ItemTouchHelper mItemTouchHelper;
     List<Table> list;
     RecyclerListAdapter adapter;
@@ -48,6 +52,7 @@ public class SellFragment extends BaseFragment  {
         super.onViewCreated(view, savedInstanceState);
         setHasOptionsMenu(true);
         connectDatabase();
+
         managerTable=new ManagerTable(getActivity());
         list = new ArrayList<Table>();
         list= managerTable.tableList();
@@ -81,14 +86,14 @@ public class SellFragment extends BaseFragment  {
                 }
             }
         });
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setAdapter(adapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(adapter);
         mItemTouchHelper = new ItemTouchHelper(callback);
-        mItemTouchHelper.attachToRecyclerView(recyclerView);
+        mItemTouchHelper.attachToRecyclerView(mRecyclerView);
 
 
     }
@@ -141,9 +146,42 @@ public class SellFragment extends BaseFragment  {
             getActivity().getSupportFragmentManager().popBackStack();
             Toast.makeText(getActivity(), "back", Toast.LENGTH_SHORT).show();
         }*/
-        if (id== R.id.action_settings)
+        if (id== R.id.action_plus_table)
         {
-            Toast.makeText(getActivity(), "Thêm bàn", Toast.LENGTH_SHORT).show();
+            /*Toast.makeText(getActivity(), "Thêm bàn", Toast.LENGTH_SHORT).show();
+            Table table=new Table("Bàn Vip",0);
+
+            managerTable.insertData(table.getTableName(),table.getSort());
+            list.add(table);
+            mRecyclerView.setAdapter(adapter);*/
+            final Dialog dialog=new Dialog(getActivity());
+            dialog.setTitle("Thêm bàn");
+
+            dialog.setContentView(R.layout.insert_customdialog_layout);
+            dialog.show();
+            final EditText mEdtPlus= (EditText) dialog.findViewById(R.id.edt_plus);
+            Button mBtnOK = (Button) dialog.findViewById(R.id.btn_ok);
+            Button mBtnCancel= (Button) dialog.findViewById(R.id.btn_cancel);
+            mBtnOK.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Table table=new Table();
+                    String nameTable=table.setTableName(String.valueOf(mEdtPlus.getText()));
+                    int sort=table.setSort(managerTable.sortMax()+1);
+                    managerTable.insertData(nameTable,sort);
+                    list.add(table);
+                    mRecyclerView.setAdapter(adapter);
+                    dialog.cancel();
+                }
+            });
+            mBtnCancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.cancel();
+                }
+            });
+
+
         }
         return super.onOptionsItemSelected(item);
     }

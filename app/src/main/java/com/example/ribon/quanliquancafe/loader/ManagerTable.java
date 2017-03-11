@@ -1,11 +1,14 @@
 package com.example.ribon.quanliquancafe.loader;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.example.ribon.quanliquancafe.model.Table;
 
@@ -24,7 +27,12 @@ public class ManagerTable extends SQLiteOpenHelper {
 
     private static String DB_PATH = "/data/data/com.example.ribon.quanliquancafe/databases/";
     private static String DB_NAME = "ManagerCoffee.sqlite";
+    private static String TABLE_NAME = "TableCoffee";
+
     private static final int DATABASE_VERSION=1;
+    private static final String COL_1="id";
+    private static final String COL_2="tablename";
+    private static final String COL_3="sort";
 
     private SQLiteDatabase myDataBase;
     private final Context myContext;
@@ -142,8 +150,34 @@ public class ManagerTable extends SQLiteOpenHelper {
     }
 
 
-    public void insertData(){
-        
+    public void insertData(String tableName,int sort){
+            SQLiteDatabase db=this.getWritableDatabase();
+            ContentValues contentValues=new ContentValues();
+            /*contentValues.put(COL_1,id);*/
+            contentValues.put(COL_2,tableName);
+            contentValues.put(COL_3,sort);
+            long row=db.insert(TABLE_NAME,null,contentValues);
+            if (row!=-1)
+                Toast.makeText(myContext, "New row added, row id: " + row, Toast.LENGTH_SHORT).show();
+            else
+                Toast.makeText(myContext, "Something wrong", Toast.LENGTH_SHORT).show();
+
+    }
+
+    public int sortMax(){
+        myDataBase=this.getReadableDatabase();
+        try {
+            Cursor cursor=myDataBase.rawQuery("SELECT MAX(sort) FROM TableCoffee",null);
+            cursor.moveToFirst();
+            int max = cursor.getInt(0);
+            return max;
+        }
+        catch (Exception e){
+            return 0;
+        }finally {
+            myDataBase.close();
+        }
+
     }
 
     @Override

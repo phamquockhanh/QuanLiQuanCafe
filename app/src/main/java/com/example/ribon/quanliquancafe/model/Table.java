@@ -14,6 +14,10 @@ public class Table {
         this.tableName = tableName;
         this.sort = sort;
     }
+    public Table(String tableName, int sort) {
+        this.tableName = tableName;
+        this.sort = sort;
+    }
 
     public Table() {
     }
@@ -30,15 +34,17 @@ public class Table {
         return tableName;
     }
 
-    public void setTableName(String tableName) {
+    public String setTableName(String tableName) {
         this.tableName = tableName;
+        return tableName;
     }
 
     public int getSort() {
         return sort;
     }
 
-    public void setSort(int sort) {
+    public int setSort(int sort) {
         this.sort = sort;
+        return sort;
     }
 }
