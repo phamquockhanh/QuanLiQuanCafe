@@ -14,17 +14,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.bignerdranch.expandablerecyclerview.Model.ParentObject;
+
 import com.example.ribon.quanliquancafe.R;
-import com.example.ribon.quanliquancafe.adapter.MyAdapter;
+import com.example.ribon.quanliquancafe.adapter.TableAdapter;
 import com.example.ribon.quanliquancafe.common.BaseFragment;
 import com.example.ribon.quanliquancafe.common.SimpleItemTouchHelperCallback;
 import com.example.ribon.quanliquancafe.loader.ManagerTable;
 import com.example.ribon.quanliquancafe.model.Table;
-import com.example.ribon.quanliquancafe.model.TitleChild;
+import com.example.ribon.quanliquancafe.model.Option;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.Bind;
@@ -43,7 +44,7 @@ public class SellFragment extends BaseFragment  {
     private ItemTouchHelper mItemTouchHelper;
     List<Table> tables;
     /*RecyclerListAdapter adapter;*/
-    MyAdapter adapter;
+    TableAdapter adapter;
     ManagerTable managerTable;
     @Override
     public int getResId() {
@@ -101,28 +102,42 @@ public class SellFragment extends BaseFragment  {
 
 
         // have bug here
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mRecyclerView.setHasFixedSize(true);
-        adapter = new MyAdapter(getActivity(),initData());
-        adapter.setParentClickableViewAnimationDefaultDuration();
-        adapter.setParentAndIconExpandOnClick(true);
-        mRecyclerView.setAdapter(adapter);
 
-        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(adapter);
+        /*for (Table table:tables)
+        {
+            table=new Table(Arrays.asList(plus,change,pay));
+            tables.add(table);
+        }*/
+
+        mRecyclerView.setHasFixedSize(true);
+        adapter = new TableAdapter(getActivity(),initData());
+        mRecyclerView.setAdapter(adapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        /*ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(adapter);
         mItemTouchHelper = new ItemTouchHelper(callback);
-        mItemTouchHelper.attachToRecyclerView(mRecyclerView);
+        mItemTouchHelper.attachToRecyclerView(mRecyclerView);*/
     }
-    private List<ParentObject> initData() {
-        List<ParentObject> parentObject = new ArrayList<>();
+    private List<Table> initData() {
+        Option change=new Option("Đổi món");
+        Option pay=new Option("Thanh toán");
         for(Table table: tables)
         {
-            List<Object> childList = new ArrayList<>();
-            childList.add(new TitleChild("op1","op2","op3"));
-            table.setChildObjectList(childList);
-            parentObject.add(table);
+            List<Option> childList = new ArrayList<>();
+            childList.add(new Option("Thêm món"));
+            table.setChildList(childList);
+            tables.add(table);
         }
-        return parentObject;
 
+        return tables;
+       /* Option beef = new Option("beef");
+        Option cheese = new Option("cheese");
+        Option salsa = new Option("salsa");
+        Option tortilla = new Option("tortilla");
+
+        Table taco = new Table(Arrays.asList(beef, cheese, salsa, tortilla));
+        Table quesadilla = new Table(Arrays.asList(cheese, tortilla));
+        List<Table> recipes = Arrays.asList(taco, quesadilla);
+        return recipes;*/
     }
     private void connectDatabase() {
         managerTable = new ManagerTable(getActivity());

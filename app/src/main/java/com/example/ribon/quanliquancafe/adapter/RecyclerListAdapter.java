@@ -8,14 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.ribon.quanliquancafe.R;
 import com.example.ribon.quanliquancafe.activity.OrderActivity;
 import com.example.ribon.quanliquancafe.interfaces.ItemTouchHelperAdapter;
 import com.example.ribon.quanliquancafe.interfaces.ItemTouchHelperViewHolder;
 import com.example.ribon.quanliquancafe.model.Table;
-import com.example.ribon.quanliquancafe.util.ColorUtils;
 
 import java.util.Collections;
 import java.util.List;
@@ -37,7 +35,7 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
     }
     @Override
     public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_sell, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.table_view, parent, false);
         ItemViewHolder itemViewHolder = new ItemViewHolder(view);
        /* int backgroundColorForViewHolder = ColorUtils.getViewHolderBackgroundColorFromInstance(parent.getContext(),viewHolderCount);
         itemViewHolder.itemView.setBackgroundColor(backgroundColorForViewHolder);

@@ -1,7 +1,10 @@
 package com.example.ribon.quanliquancafe.model;
 
-import com.bignerdranch.expandablerecyclerview.Model.ParentObject;
 
+
+
+
+import com.bignerdranch.expandablerecyclerview.model.Parent;
 
 import java.util.List;
 
@@ -9,11 +12,12 @@ import java.util.List;
  * Created by Ribon on 09/03/2017.
  */
 
-public class Table implements ParentObject{
-    private List<Object> mChildrenList;
+public class Table implements Parent<Option> {
+    private List<Option> mChildrenList;
     private int id;
     private String tableName;
     private int sort;
+
 
     public Table(String tableName){
         this.tableName=tableName;
@@ -29,6 +33,9 @@ public class Table implements ParentObject{
     }
 
     public Table() {
+    }
+
+    public Table(List<Option> options) {
     }
 
     public int getId() {
@@ -58,11 +65,16 @@ public class Table implements ParentObject{
     }
 
     @Override
-    public List<Object> getChildObjectList() {
+    public List<Option> getChildList() {
         return mChildrenList;
     }
 
     @Override
-    public void setChildObjectList(List<Object> list) {
-        mChildrenList = list;    }
+    public boolean isInitiallyExpanded() {
+        return false;
+    }
+    public void setChildList(List<Option> childList) {
+        mChildrenList = childList;
+    }
+
 }

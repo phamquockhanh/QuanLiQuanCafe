@@ -1,4 +1,5 @@
 package com.example.ribon.quanliquancafe.viewholder;
+/*
 
 import android.view.View;
 import android.widget.TextView;
@@ -6,9 +7,11 @@ import android.widget.TextView;
 import com.bignerdranch.expandablerecyclerview.ViewHolder.ChildViewHolder;
 import com.example.ribon.quanliquancafe.R;
 
+*/
 /**
  * Created by Ribon on 12/03/2017.
- */
+ *//*
+
 
 public class TitleChildViewHolder extends ChildViewHolder {
     public TextView option1,option2,option3;
@@ -19,3 +22,4 @@ public class TitleChildViewHolder extends ChildViewHolder {
         option3 = (TextView)itemView.findViewById(R.id.option3);
     }
 }
+*/
