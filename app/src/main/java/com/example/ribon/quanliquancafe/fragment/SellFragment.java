@@ -109,23 +109,28 @@ public class SellFragment extends BaseFragment  {
             tables.add(table);
         }*/
 
-        mRecyclerView.setHasFixedSize(true);
+        /*mRecyclerView.setHasFixedSize(true);*/
         adapter = new TableAdapter(getActivity(),initData());
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        /*ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(adapter);
+       /* mRecyclerView.setHasFixedSize(false);*/
+        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(adapter);
         mItemTouchHelper = new ItemTouchHelper(callback);
-        mItemTouchHelper.attachToRecyclerView(mRecyclerView);*/
+        mItemTouchHelper.attachToRecyclerView(mRecyclerView);
     }
     private List<Table> initData() {
+        Option order=new Option("Thêm món");
         Option change=new Option("Đổi món");
         Option pay=new Option("Thanh toán");
+        List<Option> childList = new ArrayList<>();
+        childList.add(order);
+        childList.add(change);
+        childList.add(pay);
         for(Table table: tables)
         {
-            List<Option> childList = new ArrayList<>();
-            childList.add(new Option("Thêm món"));
+
             table.setChildList(childList);
-            tables.add(table);
+            /*tables.add(table);*/
         }
 
         return tables;
@@ -211,8 +216,10 @@ public class SellFragment extends BaseFragment  {
                     int sort=table.setSort(managerTable.sortMax()+1);
                     managerTable.insertData(nameTable,sort);
                     tables.add(table);
-                    /*adapter.notifyDataSetChanged();*/
+                    adapter.notifyParentInserted(sort+1);
                     mRecyclerView.setAdapter(adapter);
+                    /*adapter.notifyDataSetChanged();*/
+                    /*adapter.updateData(tables);*/
 
                     dialog.cancel();
                 }
