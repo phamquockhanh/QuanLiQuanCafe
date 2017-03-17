@@ -4,28 +4,30 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 
 import com.example.ribon.quanliquancafe.R;
-import com.example.ribon.quanliquancafe.adapter.TableAdapter;
+import com.example.ribon.quanliquancafe.adapter.RecyclerListAdapter;
 import com.example.ribon.quanliquancafe.common.BaseFragment;
 import com.example.ribon.quanliquancafe.common.SimpleItemTouchHelperCallback;
-import com.example.ribon.quanliquancafe.loader.ManagerTable;
+import com.example.ribon.quanliquancafe.loader.TableDao;
 import com.example.ribon.quanliquancafe.model.Table;
-import com.example.ribon.quanliquancafe.model.Option;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import butterknife.Bind;
@@ -34,18 +36,18 @@ import butterknife.Bind;
  * Created by Ribon on 08/03/2017.
  */
 
-public class SellFragment extends BaseFragment  {
+public class SellFragment extends BaseFragment implements RecyclerListAdapter.RecyclerListAdapterOnClickHandler  {
     @Bind(R.id.recycler_view) RecyclerView mRecyclerView;
     /*@Bind(R.id.edt_plus)EditText mEdtPlus;
     @Bind(R.id.btn_ok)Button mBtnOK;
     @Bind(R.id.btn_cancel)Button mBtnCancel;*/
 
 
+
     private ItemTouchHelper mItemTouchHelper;
-    List<Table> tables;
     /*RecyclerListAdapter adapter;*/
-    TableAdapter adapter;
-    ManagerTable managerTable;
+    RecyclerListAdapter adapter;
+   /* ManagerTable managerTable;*/
     @Override
     public int getResId() {
         return R.layout.fragment_sell;
@@ -55,11 +57,15 @@ public class SellFragment extends BaseFragment  {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setHasOptionsMenu(true);
-        connectDatabase();
+        createtable();
 
-        managerTable=new ManagerTable(getActivity());
+        /*tables=Table.listAll(Table.class);*/
+        /*table= (Table) Table.listAll(Table.class);*/
+        /*connectDatabase();
+*/
+        /*managerTable=new ManagerTable(getActivity());
         tables = new ArrayList<Table>();
-        tables = managerTable.tableList();
+        tables = managerTable.tableList();*/
 
         /*adapter = new RecyclerListAdapter(getActivity(),tables);*/
         /*adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
@@ -110,15 +116,32 @@ public class SellFragment extends BaseFragment  {
         }*/
 
         /*mRecyclerView.setHasFixedSize(true);*/
-        adapter = new TableAdapter(getActivity(),initData());
+        TableDao tableDao=new TableDao(getActivity());
+        adapter = new RecyclerListAdapter(getActivity(),tableDao.getAll(),this);
         mRecyclerView.setAdapter(adapter);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-       /* mRecyclerView.setHasFixedSize(false);*/
+        mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
+        mRecyclerView.setHasFixedSize(true);
         ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(adapter);
         mItemTouchHelper = new ItemTouchHelper(callback);
         mItemTouchHelper.attachToRecyclerView(mRecyclerView);
     }
-    private List<Table> initData() {
+
+    private void createtable() {
+        Log.i("OrmLite","######");
+        TableDao tableDao=new TableDao(getActivity());
+        if(tableDao.getAll().size()==0)
+        {
+            Table table1=new Table();
+            table1.setTitle("Bàn 1");
+            table1.setSort(1);
+            tableDao.create(table1);
+            Log.i("OrmLite","Id"+table1.getId());
+        }
+    }
+
+
+
+   /* private List<Table> initData() {
         Option order=new Option("Thêm món");
         Option change=new Option("Đổi món");
         Option pay=new Option("Thanh toán");
@@ -130,21 +153,12 @@ public class SellFragment extends BaseFragment  {
         {
 
             table.setChildList(childList);
-            /*tables.add(table);*/
+            *//*tables.add(table);*//*
         }
 
         return tables;
-       /* Option beef = new Option("beef");
-        Option cheese = new Option("cheese");
-        Option salsa = new Option("salsa");
-        Option tortilla = new Option("tortilla");
-
-        Table taco = new Table(Arrays.asList(beef, cheese, salsa, tortilla));
-        Table quesadilla = new Table(Arrays.asList(cheese, tortilla));
-        List<Table> recipes = Arrays.asList(taco, quesadilla);
-        return recipes;*/
-    }
-    private void connectDatabase() {
+    }*/
+   /* private void connectDatabase() {
         managerTable = new ManagerTable(getActivity());
         try {
             managerTable.createDataBase();
@@ -153,7 +167,7 @@ public class SellFragment extends BaseFragment  {
             e.printStackTrace();
         }
         managerTable.close();
-    }
+    }*/
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -167,16 +181,6 @@ public class SellFragment extends BaseFragment  {
 
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-//        SharedPreferences pref = getActivity().getSharedPreferences("luuPossition",Context.MODE_PRIVATE);
-//        for(int i=0;i<tables.size();i++){
-//            tables.add(pref.getString("index"+i,""));
-//            Log.d("onresume",i+"");
-//        }
-
-    }
 
     @Override
     public void onAttach(Context context) {
@@ -188,40 +192,38 @@ public class SellFragment extends BaseFragment  {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-       /* if(id==android.R.id.home){
-            getActivity().getSupportFragmentManager().popBackStack();
-            Toast.makeText(getActivity(), "back", Toast.LENGTH_SHORT).show();
-        }*/
-        if (id== R.id.action_plus_table)
+        final Dialog dialog=new Dialog(getActivity());
+        final EditText mEdtInsert;
+        if (id== R.id.action_insert_table)
         {
-            /*Toast.makeText(getActivity(), "Thêm bàn", Toast.LENGTH_SHORT).show();
-            Table table=new Table("Bàn Vip",0);
 
-            managerTable.insertData(table.getTableName(),table.getSort());
-            tables.add(table);
-            mRecyclerView.setAdapter(adapter);*/
-            final Dialog dialog=new Dialog(getActivity());
+
             dialog.setTitle("Thêm bàn");
 
             dialog.setContentView(R.layout.insert_customdialog_layout);
+            dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
             dialog.show();
-            final EditText mEdtPlus= (EditText) dialog.findViewById(R.id.edt_plus);
+            final EditText mEdtPlus= (EditText) dialog.findViewById(R.id.edt_insert);
             Button mBtnOK = (Button) dialog.findViewById(R.id.btn_ok);
             Button mBtnCancel= (Button) dialog.findViewById(R.id.btn_cancel);
+            mEdtInsert= (EditText) dialog.findViewById(R.id.edt_insert);
             mBtnOK.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Table table=new Table();
-                    String nameTable=table.setTableName(String.valueOf(mEdtPlus.getText()));
-                    int sort=table.setSort(managerTable.sortMax()+1);
-                    managerTable.insertData(nameTable,sort);
-                    tables.add(table);
-                    adapter.notifyParentInserted(sort+1);
-                    mRecyclerView.setAdapter(adapter);
-                    /*adapter.notifyDataSetChanged();*/
-                    /*adapter.updateData(tables);*/
-
-                    dialog.cancel();
+                    String strNameTable=mEdtInsert.getText().toString();
+                    if (TextUtils.isEmpty(strNameTable)) {
+                        Toast.makeText(getActivity(), "Vui lòng nhập tên bàn", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        TableDao tableDao=new TableDao(getActivity());
+                        Table table=new Table(strNameTable,(tableDao.sortMax()+1));
+                        Toast.makeText(getActivity(), ""+(tableDao.sortMax()+1), Toast.LENGTH_SHORT).show();
+                        tableDao.create(table);
+                        Toast.makeText(getActivity(), "Thêm bàn thành công", Toast.LENGTH_SHORT).show();
+                        adapter.addTable(table);
+                        mRecyclerView.setAdapter(adapter);
+                        dialog.cancel();
+                    }
                 }
             });
             mBtnCancel.setOnClickListener(new View.OnClickListener() {
@@ -231,8 +233,21 @@ public class SellFragment extends BaseFragment  {
                 }
             });
 
+        }
 
+        if(id==R.id.action_save_reference) {
+            TableDao tableDao=new TableDao(getActivity());
+                for (int i = 0; i < tableDao.getAll().size(); i++) {
+                    /*managerTable.updateSort(tables.get(i).getId(), i);*/
+                }
         }
         return super.onOptionsItemSelected(item);
     }
+
+
+    @Override
+    public void onClick(Table item) {
+
+    }
+
 }

@@ -1,5 +1,6 @@
 package com.example.ribon.quanliquancafe.loader;
 
+/*
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -19,9 +20,11 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+*/
 /**
  * Created by Ribon on 09/03/2017.
- */
+ *//*
+
 
 public class ManagerTable extends SQLiteOpenHelper {
 
@@ -129,7 +132,9 @@ public class ManagerTable extends SQLiteOpenHelper {
         cursor.moveToFirst();
         do{
             Table item=new Table();
-            item.setId(cursor.getInt(0));
+           */
+/* item.setId(cursor.getInt(0));*//*
+
             item.setTableName(cursor.getString(1));
             item.setSort(cursor.getInt(2));
             tables.add(item);
@@ -153,14 +158,18 @@ public class ManagerTable extends SQLiteOpenHelper {
     public void insertData(String tableName,int sort){
             SQLiteDatabase db=this.getWritableDatabase();
             ContentValues contentValues=new ContentValues();
-            /*contentValues.put(COL_1,id);*/
+            */
+/*contentValues.put(COL_1,id);*//*
+
             contentValues.put(COL_2,tableName);
             contentValues.put(COL_3,sort);
             long row=db.insert(TABLE_NAME,null,contentValues);
-            if (row!=-1)
+           */
+/* if (row!=-1)
                 Toast.makeText(myContext, "New row added, row id: " + row, Toast.LENGTH_SHORT).show();
             else
-                Toast.makeText(myContext, "Something wrong", Toast.LENGTH_SHORT).show();
+                Toast.makeText(myContext, "Something wrong", Toast.LENGTH_SHORT).show();*//*
+
 
     }
 
@@ -185,3 +194,4 @@ public class ManagerTable extends SQLiteOpenHelper {
 
     }
 }
+*/

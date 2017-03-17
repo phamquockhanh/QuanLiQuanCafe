@@ -5,37 +5,43 @@ package com.example.ribon.quanliquancafe.model;
 
 
 import com.bignerdranch.expandablerecyclerview.model.Parent;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 
+
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Ribon on 09/03/2017.
  */
-
-public class Table implements Parent<Option> {
-    private List<Option> mChildrenList;
+@DatabaseTable(tableName="Table")
+public class Table implements Serializable{
+    @DatabaseField(generatedId = true,columnName = "ID")
     private int id;
-    private String tableName;
-    private int sort;
+    @DatabaseField(columnName = "TITLE")
+    private String title;
+    @DatabaseField(columnName="SORT",canBeNull = false)
+    private long sort;
 
-
-    public Table(String tableName){
-        this.tableName=tableName;
-    }
-    public Table(int id, String tableName, int sort) {
-        this.id = id;
-        this.tableName = tableName;
-        this.sort = sort;
-    }
-    public Table(String tableName, int sort) {
-        this.tableName = tableName;
-        this.sort = sort;
+    public Table(String title,long sort) {
+        this.title = title;
+        this.sort=sort;
     }
 
-    public Table() {
+    public Table(String title) {
+        this.title = title;
     }
 
-    public Table(List<Option> options) {
+    public Table(){
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public int getId() {
@@ -46,35 +52,11 @@ public class Table implements Parent<Option> {
         this.id = id;
     }
 
-    public String getTableName() {
-        return tableName;
-    }
-
-    public String setTableName(String tableName) {
-        this.tableName = tableName;
-        return tableName;
-    }
-
-    public int getSort() {
+    public long getSort() {
         return sort;
     }
 
-    public int setSort(int sort) {
+    public void setSort(int sort) {
         this.sort = sort;
-        return sort;
     }
-
-    @Override
-    public List<Option> getChildList() {
-        return mChildrenList;
-    }
-
-    @Override
-    public boolean isInitiallyExpanded() {
-        return false;
-    }
-    public void setChildList(List<Option> childList) {
-        mChildrenList = childList;
-    }
-
 }

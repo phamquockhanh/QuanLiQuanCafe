@@ -2,15 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_insert_table"
+        android:id="@+id/action_insert_dish"
         android:orderInCategory="100"
-        android:title="@string/action_insert"
-
+        android:title="Thêm món"
         app:showAsAction="never" />
     <item
-        android:id="@+id/action_save_reference"
+        android:id="@+id/action_change_dish"
         android:orderInCategory="100"
-        android:title="@string/action_save_reference"
-
+        android:title="Đổi món"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_pay"
+        android:orderInCategory="100"
+        android:title="Tính tiền"
         app:showAsAction="never" />
 </menu>

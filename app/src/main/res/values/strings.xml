@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">QuanLiQuanCafe</string>
-    <string name="plus_talbe">Thêm bàn</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="action_save_reference">Lưu sơ đồ</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="action_insert">Thêm bàn</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>

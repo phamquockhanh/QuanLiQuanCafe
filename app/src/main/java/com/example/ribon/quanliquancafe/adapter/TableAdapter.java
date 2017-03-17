@@ -1,6 +1,6 @@
 package com.example.ribon.quanliquancafe.adapter;
 
-import android.content.Context;
+/*import android.content.Context;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,15 +17,17 @@ import com.example.ribon.quanliquancafe.viewholder.TableViewHolder;
 import java.util.Collections;
 import java.util.List;
 
-/**
+import butterknife.OnClick;
+
+*//**
  * Created by Ribon on 13/03/2017.
- */
+ *//*
 
 public class TableAdapter extends ExpandableRecyclerAdapter<Table,Option,TableViewHolder,OptionViewHolder> implements ItemTouchHelperAdapter {
     private LayoutInflater inflater;
     private List<Table> mItems;
 
-    /**
+    *//**
      * Primary constructor. Sets up {@link #mParentList} and {@link #mFlatItemList}.
      * <p>
      * Any changes to {@link #mParentList} should be made on the original instance, and notified via
@@ -40,7 +42,7 @@ public class TableAdapter extends ExpandableRecyclerAdapter<Table,Option,TableVi
      *
      * @param parentList List of all parents to be displayed in the RecyclerView that this
      *                   adapter is linked to
-     */
+     *//*
     public TableAdapter(Context context,@NonNull List<Table> parentList) {
         super(parentList);
         inflater = LayoutInflater.from(context);
@@ -75,8 +77,19 @@ public class TableAdapter extends ExpandableRecyclerAdapter<Table,Option,TableVi
 
     @Override
     public boolean onItemMove(int fromPosition, int toPosition) {
-        Collections.swap(mItems, fromPosition, toPosition);
-        notifyParentMoved(fromPosition,toPosition);
+//        Collections.swap(mItems, fromPosition, toPosition);
+//        notifyParentMoved(fromPosition,toPosition);
+//        return true;
+        if (fromPosition < toPosition) {
+            for (int i = fromPosition; i < toPosition; i++) {
+                Collections.swap(mItems, i, i + 1);
+            }
+        } else {
+            for (int i = fromPosition; i > toPosition; i--) {
+                Collections.swap(mItems, i, i - 1);
+            }
+        }
+        notifyItemMoved(fromPosition, toPosition);
         return true;
     }
 
@@ -85,9 +98,13 @@ public class TableAdapter extends ExpandableRecyclerAdapter<Table,Option,TableVi
         mItems.remove(position);
         notifyParentRemoved(position);
     }
-    /*public void updateData(List<Table> viewModels) {
+    *//*public void updateData(List<Table> viewModels) {
         mItems.clear();
         mItems.addAll(viewModels);
         notifyParentDataSetChanged(true);
-    }*/
-}
+    }*//*
+
+    public void addTable(Table table){
+        this.mItems.add(table);
+    }
+}*/
