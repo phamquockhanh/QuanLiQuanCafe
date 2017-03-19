@@ -9,6 +9,7 @@ import java.util.List;
 
 */
 
+import com.example.ribon.quanliquancafe.loader.ProductDao;
 import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.field.ForeignCollectionField;
@@ -29,7 +30,7 @@ public class Category implements Serializable{
     @DatabaseField(columnName = "NAME")
     private String name;
     @ForeignCollectionField
-    private ForeignCollection<Category>categories;
+    private ForeignCollection<Product> products;
 
     public Category(String name) {
         this.name = name;
@@ -54,12 +55,11 @@ public class Category implements Serializable{
         this.name = name;
     }
 
-    public List<Category>getCategories(){
-        List<Category>categories=null;
-        for (Category category:categories){
-            categories.add(category);
-        }
-        return categories;
+    public ForeignCollection<Product> getProducts() {
+        return products;
     }
 
+    public void setProducts(ForeignCollection<Product> products) {
+        this.products = products;
+    }
 }

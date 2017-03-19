@@ -22,9 +22,9 @@ public class Table implements Serializable{
     @DatabaseField(columnName = "TITLE")
     private String title;
     @DatabaseField(columnName="SORT",canBeNull = false)
-    private long sort;
+    private int sort;
 
-    public Table(String title,long sort) {
+    public Table(String title,int sort) {
         this.title = title;
         this.sort=sort;
     }
@@ -52,7 +52,7 @@ public class Table implements Serializable{
         this.id = id;
     }
 
-    public long getSort() {
+    public int getSort() {
         return sort;
     }
 

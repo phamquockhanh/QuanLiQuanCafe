@@ -14,7 +14,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/img_products"
-            android:background="@drawable/zzz_account_alert"/>
+
+            />
 
         <TextView
             android:id="@+id/tv_product_name"
@@ -23,15 +24,14 @@
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="aaaaaa"/>
+            android:text="Cafe đen"/>
         <TextView
             android:id="@+id/tv_price"
-            android:padding="16dp"
             android:textStyle="bold"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="aaaaaa"/>
+            android:text="15000"/>
     </LinearLayout>
 
 

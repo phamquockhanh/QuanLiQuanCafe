@@ -21,7 +21,7 @@ public class Product implements Serializable{
     private int quantity;
     @DatabaseField(columnName = "URL_IMG")
     private String url;
-    @DatabaseField(foreign=true,foreignAutoRefresh=true)
+    @DatabaseField(foreign=true,foreignAutoRefresh=true, foreignColumnName = "ID")
     private Category categories;
 
     public Product(Category categories, String url, int quantity, float price, String name) {

@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -38,9 +39,7 @@ import butterknife.Bind;
 
 public class SellFragment extends BaseFragment implements RecyclerListAdapter.RecyclerListAdapterOnClickHandler  {
     @Bind(R.id.recycler_view) RecyclerView mRecyclerView;
-    /*@Bind(R.id.edt_plus)EditText mEdtPlus;
-    @Bind(R.id.btn_ok)Button mBtnOK;
-    @Bind(R.id.btn_cancel)Button mBtnCancel;*/
+
 
 
 
@@ -131,11 +130,71 @@ public class SellFragment extends BaseFragment implements RecyclerListAdapter.Re
         TableDao tableDao=new TableDao(getActivity());
         if(tableDao.getAll().size()==0)
         {
+            Table table=new Table();
+            table.setTitle("Bàn 1");
+            table.setSort(0);
+            tableDao.create(table);
+            Log.i("OrmLite","Id"+table.getId());
+
             Table table1=new Table();
-            table1.setTitle("Bàn 1");
+            table1.setTitle("Bàn 2");
             table1.setSort(1);
             tableDao.create(table1);
-            Log.i("OrmLite","Id"+table1.getId());
+            Log.i("OrmLite","Id"+table.getId());
+
+            Table table2=new Table();
+            table2.setTitle("Bàn 3");
+            table2.setSort(2);
+            tableDao.create(table2);
+            Log.i("OrmLite","Id"+table.getId());
+
+            Table table3=new Table();
+            table3.setTitle("Bàn 4");
+            table3.setSort(3);
+            tableDao.create(table3);
+            Log.i("OrmLite","Id"+table.getId());
+
+            Table table4=new Table();
+            table4.setTitle("Bàn 5");
+            table4.setSort(4);
+            tableDao.create(table4);
+            Log.i("OrmLite","Id"+table.getId());
+
+            Table table5=new Table();
+            table5.setTitle("Bàn 6");
+            table5.setSort(5);
+            tableDao.create(table5);
+            Log.i("OrmLite","Id"+table.getId());
+
+            Table table6=new Table();
+            table6.setTitle("Bàn 7");
+            table6.setSort(6);
+            tableDao.create(table6);
+            Log.i("OrmLite","Id"+table.getId());
+
+            Table table7=new Table();
+            table7.setTitle("Bàn 8");
+            table7.setSort(7);
+            tableDao.create(table7);
+            Log.i("OrmLite","Id"+table.getId());
+
+            Table table8=new Table();
+            table8.setTitle("Bàn 9");
+            table8.setSort(8);
+            tableDao.create(table8);
+            Log.i("OrmLite","Id"+table.getId());
+
+            Table table9=new Table();
+            table9.setTitle("Bàn 10");
+            table9.setSort(9);
+            tableDao.create(table9);
+            Log.i("OrmLite","Id"+table.getId());
+
+            Table table10=new Table();
+            table10.setTitle("Bàn 10");
+            table10.setSort(10);
+            tableDao.create(table10);
+            Log.i("OrmLite","Id"+table.getId());
         }
     }
 
@@ -216,8 +275,10 @@ public class SellFragment extends BaseFragment implements RecyclerListAdapter.Re
                     }
                     else {
                         TableDao tableDao=new TableDao(getActivity());
-                        Table table=new Table(strNameTable,(tableDao.sortMax()+1));
-                        Toast.makeText(getActivity(), ""+(tableDao.sortMax()+1), Toast.LENGTH_SHORT).show();
+                        Table table=new Table();
+                        table.setTitle(strNameTable);
+                        table.setSort(tableDao.sortMax());
+                        Toast.makeText(getActivity(), tableDao.sortMax()+"", Toast.LENGTH_SHORT).show();
                         tableDao.create(table);
                         Toast.makeText(getActivity(), "Thêm bàn thành công", Toast.LENGTH_SHORT).show();
                         adapter.addTable(table);
@@ -237,10 +298,15 @@ public class SellFragment extends BaseFragment implements RecyclerListAdapter.Re
 
         if(id==R.id.action_save_reference) {
             TableDao tableDao=new TableDao(getActivity());
-                for (int i = 0; i < tableDao.getAll().size(); i++) {
-                    /*managerTable.updateSort(tables.get(i).getId(), i);*/
+            boolean isSuccess = true;
+            List<Table>tables = adapter.getmItems();
+                for (int i = 0; i < tables.size(); i++) {
+                    tableDao.update(tables.get(i).getId(),i);
                 }
+            Toast.makeText(getActivity(), "Update thành công!!", Toast.LENGTH_SHORT).show();
         }
+        /*updateSort(tables.get(i).getId(), i);*/
+
         return super.onOptionsItemSelected(item);
     }
 

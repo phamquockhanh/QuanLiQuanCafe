@@ -135,6 +135,10 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
         this.mItems.add(table);
     }
 
+    public List<Table> getmItems(){
+        return mItems;
+    }
+
     private void showPopup(final View view, final Table position){
         View menuItemView = view.findViewById(R.id.tv_table);
         PopupMenu popup = new PopupMenu(context, menuItemView);

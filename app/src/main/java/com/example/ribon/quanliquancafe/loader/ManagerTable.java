@@ -145,7 +145,8 @@ public class ManagerTable extends SQLiteOpenHelper {
     public boolean updateSort(int tableId, int pos){
         myDataBase=this.getReadableDatabase();
         try{
-            myDataBase.execSQL("UPDATE TableCoffee SET sort = "+pos+" WHERE id = "+tableId);
+            myDataBase.execSQL("UPDATE TableCoffee SET sort = " +pos +" WHERE id = "+tableId);
+
             return true;
         }catch (Exception e){
             return false;

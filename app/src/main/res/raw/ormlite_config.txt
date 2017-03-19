@@ -1,5 +1,5 @@
 #
-# generated on 2017/03/17 06:41:14
+# generated on 2017/03/18 10:01:14
 #
 # --table-start--
 dataClass=com.example.ribon.quanliquancafe.model.Category
@@ -15,7 +15,7 @@ fieldName=name
 columnName=NAME
 # --field-end--
 # --field-start--
-fieldName=categories
+fieldName=products
 foreignCollection=true
 # --field-end--
 # --table-fields-end--
@@ -51,6 +51,7 @@ fieldName=categories
 foreign=true
 foreignAutoRefresh=true
 maxForeignAutoRefreshLevel=2
+foreignColumnName=ID
 # --field-end--
 # --table-fields-end--
 # --table-end--
