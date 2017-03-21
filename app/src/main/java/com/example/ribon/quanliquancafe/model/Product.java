@@ -18,16 +18,16 @@ public class Product implements Serializable{
     @DatabaseField(columnName = "PRICE")
     private float price;
     @DatabaseField(columnName = "QUANTITY")
-    private int quantity;
-    @DatabaseField(columnName = "URL_IMG")
-    private String url;
+   /* private int quantity;
+    @DatabaseField(columnName = "URL_IMG")*/
+    private String path;
     @DatabaseField(foreign=true,foreignAutoRefresh=true, foreignColumnName = "ID")
     private Category categories;
 
     public Product(Category categories, String url, int quantity, float price, String name) {
         this.categories = categories;
-        this.url = url;
-        this.quantity = quantity;
+        this.path = url;
+        /*this.quantity = quantity;*/
         this.price = price;
         this.name = name;
     }
@@ -38,7 +38,7 @@ public class Product implements Serializable{
     public Product(String name, float price, int quantity) {
         this.name = name;
         this.price = price;
-        this.quantity = quantity;
+       /* this.quantity = quantity;*/
     }
 
     public String getName() {
@@ -57,13 +57,13 @@ public class Product implements Serializable{
         this.price = price;
     }
 
-    public int getQuantity() {
+    /*public int getQuantity() {
         return quantity;
     }
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
-    }
+    }*/
 
     public Category getCategories() {
         return categories;
@@ -81,11 +81,11 @@ public class Product implements Serializable{
         this.id = id;
     }
 
-    public String getUrl() {
-        return url;
+    public String getPath() {
+        return path;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setPath(String path) {
+        this.path = path;
     }
 }

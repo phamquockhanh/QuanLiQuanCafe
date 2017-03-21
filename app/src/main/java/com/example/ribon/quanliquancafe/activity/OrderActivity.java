@@ -17,8 +17,10 @@ import com.example.ribon.quanliquancafe.fragment.InsertProductFragment;
 import com.example.ribon.quanliquancafe.fragment.LoadProductFragment;
 import com.example.ribon.quanliquancafe.fragment.SellFragment;
 import com.example.ribon.quanliquancafe.loader.CategoryDao;
+import com.example.ribon.quanliquancafe.loader.ProductDao;
 import com.example.ribon.quanliquancafe.loader.TableDao;
 import com.example.ribon.quanliquancafe.model.Category;
+import com.example.ribon.quanliquancafe.model.Product;
 import com.example.ribon.quanliquancafe.model.Table;
 
 import java.io.File;
@@ -40,7 +42,7 @@ public class OrderActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_order);
         setSupportActionBar(toolbar);
         createCategory();
-        getSupportFragmentManager().beginTransaction().replace(R.id.activity_order,new LoadProductFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.activity_order, new LoadProductFragment()).commit();
     }
 
     private void createCategory() {
@@ -48,7 +50,7 @@ public class OrderActivity extends AppCompatActivity {
 
         CategoryDao categoryDao = new CategoryDao(this);
 
-        if (categoryDao.getAll().size()== 0) {
+        if (categoryDao.getAll().size() == 0) {
             Category category = new Category();
             category.setName("Món ăn");
             categoryDao.create(category);
@@ -64,4 +66,12 @@ public class OrderActivity extends AppCompatActivity {
         }
     }
 
+    private void createProduct() {
+        ProductDao productDao = new ProductDao(this);
+        if (productDao.getAll().size() == 0) {
+            Product product = new Product();
+
+        }
+
+    }
 }

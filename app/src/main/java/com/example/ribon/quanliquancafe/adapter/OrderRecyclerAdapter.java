@@ -10,7 +10,9 @@ import android.widget.TextView;
 
 import com.example.ribon.quanliquancafe.R;
 import com.example.ribon.quanliquancafe.model.Category;
+import com.example.ribon.quanliquancafe.model.Product;
 import com.example.ribon.quanliquancafe.model.Table;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -20,7 +22,7 @@ import java.util.List;
 
 public class OrderRecyclerAdapter extends RecyclerView.Adapter<OrderRecyclerAdapter.ItemViewHolder> {
     LayoutInflater inflater;
-    List<Category>categories;
+    List<Product>products;
     private Context context;
     OrderRecyclerAdapterOnClickHandler onClickHandler;
 
@@ -28,27 +30,35 @@ public class OrderRecyclerAdapter extends RecyclerView.Adapter<OrderRecyclerAdap
     {
         void onClick(Category category);
     }
-    public OrderRecyclerAdapter(Context context,List<Category> categories,OrderRecyclerAdapterOnClickHandler onClickHandler) {
+    public OrderRecyclerAdapter(Context context,List<Product> products,OrderRecyclerAdapterOnClickHandler onClickHandler) {
         this.context=context;
-        this.categories=categories;
+        this.products=products;
         this.onClickHandler=onClickHandler;
     }
 
     @Override
     public OrderRecyclerAdapter.ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View orderView=inflater.inflate(R.layout.item_order_view,parent,false);
-        return new ItemViewHolder(orderView);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.table_view, parent, false);
+        OrderRecyclerAdapter.ItemViewHolder itemViewHolder = new OrderRecyclerAdapter.ItemViewHolder(view);
+        return itemViewHolder;
     }
 
     @Override
     public void onBindViewHolder(OrderRecyclerAdapter.ItemViewHolder holder, int position) {
-        Category category=categories.get(position);
+        Product product=products.get(position);
+        holder.txtProductName.setText(product.getName());
+        float price=product.getPrice();
+        holder.txtPrice.setText(Float.toString(price));
+        Picasso.with(context).load(product.getPath()).into(holder.imgProduct);
+
     }
 
     @Override
     public int getItemCount() {
-        return 0;
-    }
+        if (products == null)
+            return 0;
+        else
+            return  products.size();    }
 
 
 

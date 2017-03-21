@@ -16,12 +16,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.ribon.quanliquancafe.R;
 import com.example.ribon.quanliquancafe.common.BaseFragment;
+import com.example.ribon.quanliquancafe.loader.ProductDao;
+import com.example.ribon.quanliquancafe.model.Category;
 import com.example.ribon.quanliquancafe.model.Product;
 import com.example.ribon.quanliquancafe.model.Table;
 
@@ -44,20 +48,37 @@ import static android.content.Context.MEDIA_PROJECTION_SERVICE;
 
 public class InsertProductFragment extends BaseFragment {
     private String selectedImagePath;
-    @Bind(R.id.spinner)Spinner spinner;
+    @Bind(R.id.spinner)
+    Spinner spinner;
     public static final int RESULT_GALLERY = 0;
     List<String>itemSpinner;
-    @Bind(R.id.imageView)ImageView imageView;
+    @Bind(R.id.imageView)
+    ImageView imageView;
+    @Bind(R.id.edtName)
+    EditText edtNameProduct;
+    @Bind(R.id.edtPrice)
+    EditText edtPrice;
+    String path;
+    String categoryName;
+    Category category;
+    ArrayAdapter<CharSequence>adapter;
+
     @Override
     public int getResId() {
         return R.layout.fragment_insert_product;
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        adapter=ArrayAdapter.createFromResource(getActivity(),R.array.categories,android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        categoryName=spinner.getSelectedItem().toString();
+        category=new Category();
+        category.setName(categoryName);
     }
+
     @OnClick(R.id.btnChoose)
     void selectimage(){
         Intent galleryIntent = new Intent(
@@ -65,20 +86,57 @@ public class InsertProductFragment extends BaseFragment {
                 android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(galleryIntent , RESULT_GALLERY );
     }
+    @OnClick(R.id.btnAdd)
+    void saveProducṭ̣̣̣̣̣̣(){
+        Product product=new Product();
+        product.setName(edtNameProduct.getText().toString());
+        product.setPrice(Float.parseFloat(edtPrice.getText().toString()));
+        product.setPath(path);
+        product.setCategories(category);
+        ProductDao productDao=new ProductDao(getActivity());
+        productDao.create(product);
+        Toast.makeText(getActivity(), "luu thanh cong"+product.getId(), Toast.LENGTH_SHORT).show();
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode==RESULT_GALLERY && resultCode==RESULT_OK && data!=null){
-            Uri pickedImage=data.getData();
+            try {
+                final Uri imageUri=data.getData();
+                final InputStream imagesStream=getActivity().getContentResolver().openInputStream(imageUri);
+                final Bitmap selectImage=BitmapFactory.decodeStream(imagesStream);
+                imageView.setImageBitmap(selectImage);
+                path=getRealPathFromURI(imageUri);
+            }
+            catch (FileNotFoundException e){
+                e.printStackTrace();
+
+            }
+           /* Uri pickedImage=data.getData();
             String[] filePath={MediaStore.Images.Media.DATA};
             Cursor cursor=getActivity().getContentResolver().query(pickedImage,filePath,null,null,null);
             cursor.moveToFirst();
             String imagePath=cursor.getString(cursor.getColumnIndex(filePath[0]));
             imageView.setImageBitmap(BitmapFactory.decodeFile(imagePath));
+            cursor.close();
+            path=getRealPathFromURI(pickedImage);*/
 
+        }
+    }
+
+    private String getRealPathFromURI(Uri contentURI) {
+        String result;
+        Cursor cursor = getActivity().getContentResolver().query(contentURI, null, null, null, null);
+        if (cursor == null) { // Source is Dropbox or other similar local file path
+            result = contentURI.getPath();
+        } else {
+            cursor.moveToFirst();
+            int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+            result = cursor.getString(idx);
             cursor.close();
         }
+        return result;
     }
 }
