@@ -5,9 +5,5 @@
     <string name="action_insert">Thêm bàn</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    
-    <string-array name="categories">
-        <item>Món ăn</item>
-        <item>Thức uống</item>
-    </string-array>
+
 </resources>

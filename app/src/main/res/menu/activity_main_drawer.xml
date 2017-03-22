@@ -7,9 +7,9 @@
             android:icon="@drawable/ic_sell"
             android:title="Bán hàng" />
         <item
-            android:id="@+id/nav_cook"
+            android:id="@+id/insert_product"
             android:icon="@drawable/ic_cook"
-            android:title="Quản lý bếp" />
+            android:title="Thêm sản phẩm" />
         <item
             android:id="@+id/nav_fast_payment"
             android:icon="@drawable/ic_fast_payment"

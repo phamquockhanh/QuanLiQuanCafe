@@ -4,7 +4,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -21,14 +20,12 @@ import android.widget.Toast;
 
 
 import com.example.ribon.quanliquancafe.R;
-import com.example.ribon.quanliquancafe.adapter.RecyclerListAdapter;
+import com.example.ribon.quanliquancafe.adapter.TableRecyclerAdapter;
 import com.example.ribon.quanliquancafe.common.BaseFragment;
 import com.example.ribon.quanliquancafe.common.SimpleItemTouchHelperCallback;
 import com.example.ribon.quanliquancafe.loader.TableDao;
 import com.example.ribon.quanliquancafe.model.Table;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -37,15 +34,15 @@ import butterknife.Bind;
  * Created by Ribon on 08/03/2017.
  */
 
-public class SellFragment extends BaseFragment implements RecyclerListAdapter.RecyclerListAdapterOnClickHandler  {
+public class SellFragment extends BaseFragment implements TableRecyclerAdapter.RecyclerListAdapterOnClickHandler  {
     @Bind(R.id.recycler_view) RecyclerView mRecyclerView;
 
 
 
 
     private ItemTouchHelper mItemTouchHelper;
-    /*RecyclerListAdapter adapter;*/
-    RecyclerListAdapter adapter;
+    /*TableRecyclerAdapter adapter;*/
+    TableRecyclerAdapter adapter;
    /* ManagerTable managerTable;*/
     @Override
     public int getResId() {
@@ -66,7 +63,7 @@ public class SellFragment extends BaseFragment implements RecyclerListAdapter.Re
         tables = new ArrayList<Table>();
         tables = managerTable.tableList();*/
 
-        /*adapter = new RecyclerListAdapter(getActivity(),tables);*/
+        /*adapter = new TableRecyclerAdapter(getActivity(),tables);*/
         /*adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
             public void onChanged() {
@@ -116,7 +113,7 @@ public class SellFragment extends BaseFragment implements RecyclerListAdapter.Re
 
         /*mRecyclerView.setHasFixedSize(true);*/
         TableDao tableDao=new TableDao(getActivity());
-        adapter = new RecyclerListAdapter(getActivity(),tableDao.getAll(),this);
+        adapter = new TableRecyclerAdapter(getActivity(),tableDao.getAll(),this);
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
         mRecyclerView.setHasFixedSize(true);
@@ -258,11 +255,9 @@ public class SellFragment extends BaseFragment implements RecyclerListAdapter.Re
 
 
             dialog.setTitle("Thêm bàn");
-
             dialog.setContentView(R.layout.insert_customdialog_layout);
             dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
             dialog.show();
-            final EditText mEdtPlus= (EditText) dialog.findViewById(R.id.edt_insert);
             Button mBtnOK = (Button) dialog.findViewById(R.id.btn_ok);
             Button mBtnCancel= (Button) dialog.findViewById(R.id.btn_cancel);
             mEdtInsert= (EditText) dialog.findViewById(R.id.edt_insert);

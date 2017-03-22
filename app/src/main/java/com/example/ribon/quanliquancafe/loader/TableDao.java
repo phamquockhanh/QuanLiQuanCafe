@@ -9,6 +9,7 @@ import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.stmt.UpdateBuilder;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -53,7 +54,7 @@ public class TableDao extends DatabaseManager {
     }
 
     public List<Table> getAll(){
-        List<Table>tables=null;
+        List<Table>tables = new ArrayList<>();
         try {
             tables=this.getHelper().getTableDao().queryBuilder().orderBy("sort",true).query();
         } catch (SQLException e) {

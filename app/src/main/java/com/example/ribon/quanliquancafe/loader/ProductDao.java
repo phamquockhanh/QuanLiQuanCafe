@@ -5,6 +5,7 @@ import android.content.Context;
 import com.example.ribon.quanliquancafe.model.Product;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -37,7 +38,7 @@ public class ProductDao extends DatabaseManager {
         }
     }
     public List<Product>getAll(){
-        List<Product>products=null;
+        List<Product>products=new ArrayList<>();
         try {
             products=this.getHelper().getProductDao().queryForAll();
         } catch (SQLException e) {

@@ -2,7 +2,6 @@ package com.example.ribon.quanliquancafe.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,23 +13,22 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ribon.quanliquancafe.R;
-import com.example.ribon.quanliquancafe.activity.OrderActivity;
+import com.example.ribon.quanliquancafe.activity.ProductActivity;
 import com.example.ribon.quanliquancafe.interfaces.ItemTouchHelperAdapter;
 import com.example.ribon.quanliquancafe.interfaces.ItemTouchHelperViewHolder;
 import com.example.ribon.quanliquancafe.model.Table;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import butterknife.OnClick;
 
 /**
  * Created by Ribon on 08/03/2017.
  */
 
-public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapter.ItemViewHolder>
+public class TableRecyclerAdapter extends RecyclerView.Adapter<TableRecyclerAdapter.ItemViewHolder>
         implements ItemTouchHelperAdapter {
-    private List<Table> mItems;
+    private List<Table> mItems=new ArrayList<>();
     private static int viewHolderCount;
     private final RecyclerListAdapterOnClickHandler mClickHandler;
     Context context;
@@ -39,7 +37,7 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
         void onClick(Table item);
     }
 
-    public RecyclerListAdapter(Context context, List<Table> mItems, RecyclerListAdapterOnClickHandler mClickHandler) {
+    public TableRecyclerAdapter(Context context, List<Table> mItems, RecyclerListAdapterOnClickHandler mClickHandler) {
         this.context=context;
         this.mItems=mItems;
         this.mClickHandler = mClickHandler;
@@ -63,7 +61,7 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
         /*holder.mTableTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(context, OrderActivity.class);
+                Intent intent=new Intent(context, ProductActivity.class);
                 v.getContext().startActivity(intent);
             }
         });*/
@@ -128,7 +126,7 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
             int adapterPosition=getAdapterPosition();
             Table item = mItems.get(adapterPosition);
             mClickHandler.onClick(item);
-            showPopup(mTableTextView,item);
+            showPopup(itemView,item);
         }
     }
     public void addTable(Table table){
@@ -143,7 +141,7 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
         View menuItemView = view.findViewById(R.id.tv_table);
         PopupMenu popup = new PopupMenu(context, menuItemView);
         MenuInflater inflate = popup.getMenuInflater();
-        inflate.inflate(R.menu.option, popup.getMenu());
+        inflate.inflate(R.menu.option_talbe, popup.getMenu());
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
@@ -151,7 +149,7 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
                 switch (id){
                     case R.id.action_insert_dish:
                         Toast.makeText(context, "thêm món", Toast.LENGTH_SHORT).show();
-                        Intent intent=new Intent(context,OrderActivity.class);
+                        Intent intent=new Intent(context,ProductActivity.class);
                         view.getContext().startActivity(intent);
                         break;
                     case R.id.action_change_dish:

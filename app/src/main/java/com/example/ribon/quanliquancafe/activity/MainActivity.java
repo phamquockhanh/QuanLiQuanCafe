@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import com.example.ribon.quanliquancafe.R;
 import com.example.ribon.quanliquancafe.fragment.FastPaymentFragment;
 import com.example.ribon.quanliquancafe.fragment.GuideFragment;
+import com.example.ribon.quanliquancafe.fragment.InsertProductFragment;
 import com.example.ribon.quanliquancafe.fragment.KitchenManagerFragment;
 import com.example.ribon.quanliquancafe.fragment.ReportFragment;
 import com.example.ribon.quanliquancafe.fragment.RepositoryFragment;
@@ -120,8 +121,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.nav_sell) {
             fragment = new SellFragment();
 
-        } else if (id == R.id.nav_cook) {
-            fragment = new KitchenManagerFragment();
+        } else if (id == R.id.insert_product) {
+            fragment = new InsertProductFragment();
         } else if (id == R.id.nav_report) {
             fragment = new ReportFragment();
         } else if (id == R.id.nav_fast_payment) {

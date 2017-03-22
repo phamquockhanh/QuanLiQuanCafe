@@ -70,8 +70,8 @@ public class TableAdapter extends ExpandableRecyclerAdapter<Table,Option,TableVi
     }
 
     @Override
-    public void onBindChildViewHolder(@NonNull OptionViewHolder optionViewHolder, int parentPosition, int childPosition, @NonNull Option option) {
-        optionViewHolder.bind(option);
+    public void onBindChildViewHolder(@NonNull OptionViewHolder optionViewHolder, int parentPosition, int childPosition, @NonNull Option option_talbe) {
+        optionViewHolder.bind(option_talbe);
     }
 
 

@@ -5,10 +5,10 @@
     android:id="@+id/activity_order"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.ribon.quanliquancafe.activity.OrderActivity">
+    tools:context="com.example.ribon.quanliquancafe.activity.ProductActivity">
 
-    <include
+    <!--<include
         layout="@layout/app_bar_order"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent" />-->
 </FrameLayout>

@@ -62,4 +62,9 @@ public class Category implements Serializable{
     public void setProducts(ForeignCollection<Product> products) {
         this.products = products;
     }
+
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }

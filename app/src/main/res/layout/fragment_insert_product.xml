@@ -46,7 +46,6 @@
         android:layout_toRightOf="@+id/tv_catelogies"
         android:layout_toEndOf="@+id/tv_catelogies"
         android:layout_marginLeft="29dp"
-        android:entries="@array/categories"
         android:id="@+id/spinner"
         >
     </Spinner>

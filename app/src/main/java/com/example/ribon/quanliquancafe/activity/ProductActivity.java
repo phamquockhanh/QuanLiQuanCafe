@@ -30,7 +30,7 @@ import java.io.OutputStream;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class OrderActivity extends AppCompatActivity {
+public class ProductActivity extends AppCompatActivity {
    /* ViewPager pager;
     TabLayout tabLayout;*/
 

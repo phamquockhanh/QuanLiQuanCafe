@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.example.ribon.quanliquancafe.R;
 import com.example.ribon.quanliquancafe.common.BaseFragment;
+import com.example.ribon.quanliquancafe.loader.CategoryDao;
 import com.example.ribon.quanliquancafe.loader.ProductDao;
 import com.example.ribon.quanliquancafe.model.Category;
 import com.example.ribon.quanliquancafe.model.Product;
@@ -60,8 +61,7 @@ public class InsertProductFragment extends BaseFragment {
     EditText edtPrice;
     String path;
     String categoryName;
-    Category category;
-    ArrayAdapter<CharSequence>adapter;
+    ArrayAdapter<Category> adapter;
 
     @Override
     public int getResId() {
@@ -71,12 +71,11 @@ public class InsertProductFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        adapter=ArrayAdapter.createFromResource(getActivity(),R.array.categories,android.R.layout.simple_spinner_item);
+        CategoryDao categoryDao=new CategoryDao(getActivity());
+        List<Category> categories=categoryDao.getAll();
+        adapter = new ArrayAdapter<Category>(getActivity(), R.layout.support_simple_spinner_dropdown_item, categories);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-        categoryName=spinner.getSelectedItem().toString();
-        category=new Category();
-        category.setName(categoryName);
     }
 
     @OnClick(R.id.btnChoose)
@@ -88,6 +87,8 @@ public class InsertProductFragment extends BaseFragment {
     }
     @OnClick(R.id.btnAdd)
     void saveProducṭ̣̣̣̣̣̣(){
+        Category category = (Category) spinner.getSelectedItem();
+
         Product product=new Product();
         product.setName(edtNameProduct.getText().toString());
         product.setPrice(Float.parseFloat(edtPrice.getText().toString()));
