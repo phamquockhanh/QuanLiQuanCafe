@@ -13,7 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ribon.quanliquancafe.R;
-import com.example.ribon.quanliquancafe.activity.ProductActivity;
+import com.example.ribon.quanliquancafe.activity.OrderActivity;
 import com.example.ribon.quanliquancafe.interfaces.ItemTouchHelperAdapter;
 import com.example.ribon.quanliquancafe.interfaces.ItemTouchHelperViewHolder;
 import com.example.ribon.quanliquancafe.model.Table;
@@ -61,7 +61,7 @@ public class TableRecyclerAdapter extends RecyclerView.Adapter<TableRecyclerAdap
         /*holder.mTableTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(context, ProductActivity.class);
+                Intent intent=new Intent(context, OrderActivity.class);
                 v.getContext().startActivity(intent);
             }
         });*/
@@ -149,7 +149,7 @@ public class TableRecyclerAdapter extends RecyclerView.Adapter<TableRecyclerAdap
                 switch (id){
                     case R.id.action_insert_dish:
                         Toast.makeText(context, "thêm món", Toast.LENGTH_SHORT).show();
-                        Intent intent=new Intent(context,ProductActivity.class);
+                        Intent intent=new Intent(context,OrderActivity.class);
                         view.getContext().startActivity(intent);
                         break;
                     case R.id.action_change_dish:

@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.example.ribon.quanliquancafe.R;
 import com.example.ribon.quanliquancafe.fragment.InsertProductFragment;
 import com.example.ribon.quanliquancafe.fragment.LoadProductFragment;
+import com.example.ribon.quanliquancafe.fragment.OrderingFragment;
 import com.example.ribon.quanliquancafe.fragment.SellFragment;
 import com.example.ribon.quanliquancafe.loader.CategoryDao;
 import com.example.ribon.quanliquancafe.loader.ProductDao;
@@ -30,7 +31,7 @@ import java.io.OutputStream;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ProductActivity extends AppCompatActivity {
+public class OrderActivity extends AppCompatActivity {
    /* ViewPager pager;
     TabLayout tabLayout;*/
 
@@ -42,7 +43,7 @@ public class ProductActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_order);
         setSupportActionBar(toolbar);
         createCategory();
-        getSupportFragmentManager().beginTransaction().replace(R.id.activity_order, new LoadProductFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.activity_order, new OrderingFragment()).commit();
     }
 
     private void createCategory() {

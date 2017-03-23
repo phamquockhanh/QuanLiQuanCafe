@@ -2,7 +2,7 @@ package com.example.ribon.quanliquancafe.adapter;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -18,9 +18,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ribon.quanliquancafe.R;
-import com.example.ribon.quanliquancafe.activity.ProductActivity;
+import com.example.ribon.quanliquancafe.fragment.LoadProductFragment;
+import com.example.ribon.quanliquancafe.fragment.OrderingFragment;
 import com.example.ribon.quanliquancafe.model.Product;
-import com.example.ribon.quanliquancafe.model.Table;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -35,11 +35,12 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
     LayoutInflater inflater;
     List<Product>products=new ArrayList<>();
     private Context context;
+    EditText mEdtQuaritity;
     ProductRecyclerAdapterOnClickHandler mClickHandler;
 
     public interface ProductRecyclerAdapterOnClickHandler
     {
-        void onClick(Product product);
+        void onClick(Product pos,String name,float price);
     }
     public ProductRecyclerAdapter(Context context, List<Product> products, ProductRecyclerAdapterOnClickHandler mClickHandler) {
         this.context=context;
@@ -102,18 +103,14 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
         public void onClick(final View v) {
             int adapterPosition=getAdapterPosition();
             Product item = products.get(adapterPosition);
-            mClickHandler.onClick(item);
-            showPopup(itemView);
-            showContextMenu();
-            Toast.makeText(context, "Chọn:"+item.getId() , Toast.LENGTH_SHORT).show();
-
+            showPopup(itemView,item);
+            /*Toast.makeText(context, "Chọn:"+item.getId() , Toast.LENGTH_SHORT).show();*/
         }
 
-        private void showContextMenu() {
 
-        }
 
-        private void showPopup(View v) {
+
+        private void showPopup(View v, final Product pos) {
             View menuItemView = v.findViewById(R.id.layout_item);
             PopupMenu popup = new PopupMenu(context, menuItemView);
             MenuInflater inflate = popup.getMenuInflater();
@@ -127,7 +124,7 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
                         case R.id.action_order_product:
                             dialog.setContentView(R.layout.quaritity_customdialog_layout);
                             dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-                            final EditText mEdtQuaritity= (EditText) dialog.findViewById(R.id.edt_quaritity);
+                            mEdtQuaritity= (EditText) dialog.findViewById(R.id.edt_quaritity);
                             Button mBtnOK = (Button) dialog.findViewById(R.id.btn_ok);
                             Button mBtnCancel= (Button) dialog.findViewById(R.id.btn_cancel);
                             mBtnCancel.setOnClickListener(new View.OnClickListener() {
@@ -144,8 +141,10 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
                                         Toast.makeText(context, "Vui lòng nhập số lượng", Toast.LENGTH_SHORT).show();
                                     }
                                     else
-                                        Toast.makeText(context, quaritity+"", Toast.LENGTH_SHORT).show();
-                                    dialog.cancel();
+                                        /*Toast.makeText(context, quaritity+"", Toast.LENGTH_SHORT).show();*/
+                                        putData(pos);
+                                        Toast.makeText(context, ""+pos.getId(), Toast.LENGTH_SHORT).show();
+                                        dialog.cancel();
                                 }
                             });
                             dialog.show();
@@ -157,6 +156,16 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
             });
             popup.show();
         }
+    }
+
+    void putData(Product pos){
+        LoadProductFragment fragment=new LoadProductFragment();
+        Bundle bundle=new Bundle();
+        bundle.putString("ProductName",pos.getName());
+        bundle.putFloat("ProductPrice",pos.getPrice());
+        bundle.putInt("ProductQuaritity", Integer.parseInt(mEdtQuaritity.getText().toString()));
+        fragment.setArguments(bundle);
+
     }
 }
 

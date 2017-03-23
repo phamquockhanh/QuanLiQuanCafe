@@ -59,6 +59,8 @@ public class InsertProductFragment extends BaseFragment {
     EditText edtNameProduct;
     @Bind(R.id.edtPrice)
     EditText edtPrice;
+    @Bind(R.id.edtquar)
+    EditText edtQuarity;
     String path;
     String categoryName;
     ArrayAdapter<Category> adapter;
@@ -94,8 +96,10 @@ public class InsertProductFragment extends BaseFragment {
         product.setPrice(Float.parseFloat(edtPrice.getText().toString()));
         product.setPath(path);
         product.setCategories(category);
+        product.setQuantity(Integer.parseInt(edtQuarity.getText().toString()));
         ProductDao productDao=new ProductDao(getActivity());
         productDao.create(product);
+
         Toast.makeText(getActivity(), "luu thanh cong"+product.getId(), Toast.LENGTH_SHORT).show();
     }
 
