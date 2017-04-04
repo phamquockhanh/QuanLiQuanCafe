@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.design.widget.TabLayout;
 import android.util.Log;
 
+import com.example.ribon.quanliquancafe.model.Product;
 import com.example.ribon.quanliquancafe.model.Table;
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.stmt.UpdateBuilder;
@@ -80,6 +81,15 @@ public class TableDao extends DatabaseManager {
             e.printStackTrace();
         }
         return i;
+    }
+    public Table getTable(int id){
+        Table table=new Table();
+        try {
+            table=this.getHelper().getTableDao().queryForId(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return table;
     }
 
 }

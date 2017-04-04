@@ -14,63 +14,54 @@ public class Product implements Serializable{
     @DatabaseField(generatedId = true,columnName = "ID")
     private int id;
     @DatabaseField(columnName = "NAME")
-    private String name;
+    private String mName;
     @DatabaseField(columnName = "PRICE")
-    private float price;
-    @DatabaseField(columnName = "QUANTITY")
-    private int quantity;
+    private float mPrice;
     @DatabaseField(columnName = "URL_IMG")
-    private String path;
+    private String mPath;
+    @DatabaseField(columnName = "DESCRIPTION")
+    private String mDescription;
     @DatabaseField(foreign=true,foreignAutoRefresh=true, foreignColumnName = "ID")
     private Category categories;
 
     public Product(Category categories, String url, int quantity, float price, String name) {
         this.categories = categories;
-        this.path = url;
+        mPath = url;
         /*this.quantity = quantity;*/
-        this.price = price;
-        this.name = name;
+        mPrice = price;
+        mName = name;
     }
 
     public Product() {
     }
 
-    public Product(String name, float price, int quantity, String path, Category categories) {
-        this.name = name;
-        this.price = price;
-        this.quantity = quantity;
-        this.path = path;
+    public Product(String name, float price,String path, Category categories) {
+        mName = name;
+        mPrice = price;
+        mPath = path;
         this.categories = categories;
     }
 
     public Product(String name, float price, int quantity) {
-        this.name = name;
-        this.price = price;
+        mName = name;
+        mPrice = price;
        /* this.quantity = quantity;*/
     }
 
     public String getName() {
-        return name;
+        return mName;
     }
 
     public void setName(String name) {
-        this.name = name;
+        mName = name;
     }
 
     public float getPrice() {
-        return price;
+        return mPrice;
     }
 
     public void setPrice(float price) {
-        this.price = price;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+        mPrice = price;
     }
 
     public Category getCategories() {
@@ -90,10 +81,20 @@ public class Product implements Serializable{
     }
 
     public String getPath() {
-        return path;
+        return mPath;
     }
 
     public void setPath(String path) {
-        this.path = path;
+        mPath = path;
     }
+
+
+    public String getmDescription() {
+        return mDescription;
+    }
+
+    public void setmDescription(String mDescription) {
+        this.mDescription = mDescription;
+    }
+
 }

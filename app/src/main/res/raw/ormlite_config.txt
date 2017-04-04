@@ -1,5 +1,5 @@
 #
-# generated on 2017/03/23 12:31:15
+# generated on 2017/04/02 04:24:53
 #
 # --table-start--
 dataClass=com.example.ribon.quanliquancafe.model.Category
@@ -33,10 +33,6 @@ generatedId=true
 # --field-start--
 fieldName=dateOrder
 columnName=DATEORDER
-# --field-end--
-# --field-start--
-fieldName=totalNumOrder
-columnName=TOTALNUMORDER
 # --field-end--
 # --field-start--
 fieldName=totalCostOrder
@@ -96,20 +92,20 @@ columnName=ID
 generatedId=true
 # --field-end--
 # --field-start--
-fieldName=name
+fieldName=mName
 columnName=NAME
 # --field-end--
 # --field-start--
-fieldName=price
+fieldName=mPrice
 columnName=PRICE
 # --field-end--
 # --field-start--
-fieldName=quantity
-columnName=QUANTITY
+fieldName=mPath
+columnName=URL_IMG
 # --field-end--
 # --field-start--
-fieldName=path
-columnName=URL_IMG
+fieldName=mDescription
+columnName=DESCRIPTION
 # --field-end--
 # --field-start--
 fieldName=categories

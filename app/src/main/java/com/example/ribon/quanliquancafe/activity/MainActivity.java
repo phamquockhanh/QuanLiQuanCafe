@@ -11,7 +11,9 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.ribon.quanliquancafe.R;
 import com.example.ribon.quanliquancafe.fragment.FastPaymentFragment;
@@ -22,6 +24,8 @@ import com.example.ribon.quanliquancafe.fragment.ReportFragment;
 import com.example.ribon.quanliquancafe.fragment.RepositoryFragment;
 import com.example.ribon.quanliquancafe.fragment.RevenueAndExpenditureFragment;
 import com.example.ribon.quanliquancafe.fragment.SellFragment;
+import com.example.ribon.quanliquancafe.loader.CategoryDao;
+import com.example.ribon.quanliquancafe.model.Category;
 import com.example.ribon.quanliquancafe.util.FragmentUtils;
 
 import butterknife.ButterKnife;
@@ -37,6 +41,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        createCategory();
 
         /*Dialog dialog=new Dialog(MainActivity.this);
         dialog.setTitle("Thêm bàn");
@@ -136,6 +142,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void createCategory() {
+        Log.i("OrmLite", "######");
+
+        CategoryDao categoryDao = new CategoryDao(this);
+
+        if (categoryDao.getAll().size() == 0) {
+            Category category = new Category();
+            category.setName("Món ăn");
+            categoryDao.create(category);
+            Log.i("OrmLite", "Id" + category.getId());
+            Toast.makeText(this, "" + category.getId(), Toast.LENGTH_SHORT).show();
+
+            Category category1 = new Category();
+            category1.setName("Thức uống");
+            categoryDao.create(category1);
+            Log.i("OrmLite", "Id" + category1.getId());
+            Toast.makeText(this, "" + category1.getId(), Toast.LENGTH_SHORT).show();
+
+        }
     }
 }
 

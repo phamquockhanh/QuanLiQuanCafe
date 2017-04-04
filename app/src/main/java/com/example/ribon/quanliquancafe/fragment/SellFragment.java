@@ -37,13 +37,8 @@ import butterknife.Bind;
 public class SellFragment extends BaseFragment implements TableRecyclerAdapter.RecyclerListAdapterOnClickHandler  {
     @Bind(R.id.recycler_view) RecyclerView mRecyclerView;
 
-
-
-
     private ItemTouchHelper mItemTouchHelper;
-    /*TableRecyclerAdapter adapter;*/
     TableRecyclerAdapter adapter;
-   /* ManagerTable managerTable;*/
     @Override
     public int getResId() {
         return R.layout.fragment_sell;
@@ -55,63 +50,6 @@ public class SellFragment extends BaseFragment implements TableRecyclerAdapter.R
         setHasOptionsMenu(true);
         createtable();
 
-        /*tables=Table.listAll(Table.class);*/
-        /*table= (Table) Table.listAll(Table.class);*/
-        /*connectDatabase();
-*/
-        /*managerTable=new ManagerTable(getActivity());
-        tables = new ArrayList<Table>();
-        tables = managerTable.tableList();*/
-
-        /*adapter = new TableRecyclerAdapter(getActivity(),tables);*/
-        /*adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
-            @Override
-            public void onChanged() {
-                super.onChanged();
-            }
-
-            @Override
-            public void onItemRangeMoved(int fromPosition, int toPosition, int itemCount) {
-                super.onItemRangeMoved(fromPosition, toPosition, itemCount);
-                //Log.d("demo",toPosition+"");
-               // int idBan = tables.get(fromPosition).getId();
-                //update lại sort table
-                //UPDATE TABLE TableCoffee SET sort = <toPosition> WHERE id = <idBan>
-                //managerTable.updateSort(idBan, toPosition);
-                //Log.d("test", "from: "+fromPosition + " - to:"+toPosition);
-                if (fromPosition < toPosition) {
-                    for (int i = fromPosition; i < toPosition; i++) {
-                        int idBan = tables.get(i).getId();
-                        managerTable.updateSort(idBan, i+1);
-                    }
-                } else {
-                    for (int i = fromPosition; i > toPosition; i--) {
-                        int idBan = tables.get(i).getId();
-                        managerTable.updateSort(idBan, i-1);
-                    }
-                }
-            }
-        });*/
-        /*mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
-        mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setAdapter(adapter);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(adapter);
-        mItemTouchHelper = new ItemTouchHelper(callback);
-        mItemTouchHelper.attachToRecyclerView(mRecyclerView);*/
-
-
-
-        // have bug here
-
-        /*for (Table table:tables)
-        {
-            table=new Table(Arrays.asList(plus,change,pay));
-            tables.add(table);
-        }*/
-
-        /*mRecyclerView.setHasFixedSize(true);*/
         TableDao tableDao=new TableDao(getActivity());
         adapter = new TableRecyclerAdapter(getActivity(),tableDao.getAll(),this);
         mRecyclerView.setAdapter(adapter);
@@ -187,43 +125,8 @@ public class SellFragment extends BaseFragment implements TableRecyclerAdapter.R
             tableDao.create(table9);
             Log.i("OrmLite","Id"+table.getId());
 
-            Table table10=new Table();
-            table10.setTitle("Bàn 10");
-            table10.setSort(10);
-            tableDao.create(table10);
-            Log.i("OrmLite","Id"+table.getId());
         }
     }
-
-
-
-   /* private List<Table> initData() {
-        Option order=new Option("Thêm món");
-        Option change=new Option("Đổi món");
-        Option pay=new Option("Thanh toán");
-        List<Option> childList = new ArrayList<>();
-        childList.add(order);
-        childList.add(change);
-        childList.add(pay);
-        for(Table table: tables)
-        {
-
-            table.setChildList(childList);
-            *//*tables.add(table);*//*
-        }
-
-        return tables;
-    }*/
-   /* private void connectDatabase() {
-        managerTable = new ManagerTable(getActivity());
-        try {
-            managerTable.createDataBase();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        managerTable.close();
-    }*/
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -300,7 +203,6 @@ public class SellFragment extends BaseFragment implements TableRecyclerAdapter.R
                 }
             Toast.makeText(getActivity(), "Update thành công!!", Toast.LENGTH_SHORT).show();
         }
-        /*updateSort(tables.get(i).getId(), i);*/
 
         return super.onOptionsItemSelected(item);
     }

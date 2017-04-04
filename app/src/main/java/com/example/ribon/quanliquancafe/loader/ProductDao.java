@@ -46,4 +46,14 @@ public class ProductDao extends DatabaseManager {
         }
         return products;
     }
+
+    public Product getProduct(int id){
+        Product product=new Product();
+        try {
+            product=this.getHelper().getProductDao().queryForId(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return product;
+    }
 }

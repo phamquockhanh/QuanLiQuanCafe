@@ -15,17 +15,14 @@ public class Order implements Serializable {
     int id;
     @DatabaseField(columnName = "DATEORDER")
     String dateOrder;
-    @DatabaseField(columnName = "TOTALNUMORDER")
-    int totalNumOrder;
     @DatabaseField(columnName = "TOTALCOSTORDER")
     float totalCostOrder;
     @DatabaseField(foreign=true,foreignAutoRefresh=true, foreignColumnName = "ID")
     private Table tables;
 
-    public Order(int id, String dateOrder, int totalNumOrder, float totalCostOrder, Table tables) {
+    public Order(int id, String dateOrder, float totalCostOrder, Table tables) {
         this.id = id;
         this.dateOrder = dateOrder;
-        this.totalNumOrder = totalNumOrder;
         this.totalCostOrder = totalCostOrder;
         this.tables = tables;
     }
@@ -47,14 +44,6 @@ public class Order implements Serializable {
 
     public void setDateOrder(String dateOrder) {
         this.dateOrder = dateOrder;
-    }
-
-    public int getTotalNumOrder() {
-        return totalNumOrder;
-    }
-
-    public void setTotalNumOrder(int totalNumOrder) {
-        this.totalNumOrder = totalNumOrder;
     }
 
     public float getTotalCostOrder() {

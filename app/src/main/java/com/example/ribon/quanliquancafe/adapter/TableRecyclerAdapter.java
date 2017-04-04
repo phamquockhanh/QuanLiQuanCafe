@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.ribon.quanliquancafe.R;
 import com.example.ribon.quanliquancafe.activity.OrderActivity;
+import com.example.ribon.quanliquancafe.activity.TextActivity;
 import com.example.ribon.quanliquancafe.interfaces.ItemTouchHelperAdapter;
 import com.example.ribon.quanliquancafe.interfaces.ItemTouchHelperViewHolder;
 import com.example.ribon.quanliquancafe.model.Table;
@@ -137,7 +138,7 @@ public class TableRecyclerAdapter extends RecyclerView.Adapter<TableRecyclerAdap
         return mItems;
     }
 
-    private void showPopup(final View view, final Table position){
+    private void showPopup(final View view, final Table pos){
         View menuItemView = view.findViewById(R.id.tv_table);
         PopupMenu popup = new PopupMenu(context, menuItemView);
         MenuInflater inflate = popup.getMenuInflater();
@@ -150,14 +151,18 @@ public class TableRecyclerAdapter extends RecyclerView.Adapter<TableRecyclerAdap
                     case R.id.action_insert_dish:
                         Toast.makeText(context, "thêm món", Toast.LENGTH_SHORT).show();
                         Intent intent=new Intent(context,OrderActivity.class);
+                        intent.putExtra("TABLE",pos.getId());
                         view.getContext().startActivity(intent);
                         break;
                     case R.id.action_change_dish:
                         Toast.makeText(context, "đổi món", Toast.LENGTH_SHORT).show();
+                        Intent intent1=new Intent(context,TextActivity.class);
+                        view.getContext().startActivity(intent1);
                         break;
 
                     case R.id.action_pay:
                         Toast.makeText(context, "thanh toán", Toast.LENGTH_SHORT).show();
+
                         break;
 
 

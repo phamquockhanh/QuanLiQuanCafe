@@ -53,14 +53,14 @@ public class InsertProductFragment extends BaseFragment {
     Spinner spinner;
     public static final int RESULT_GALLERY = 0;
     List<String>itemSpinner;
-    @Bind(R.id.imageView)
+    @Bind(R.id.imgProduct)
     ImageView imageView;
     @Bind(R.id.edtName)
     EditText edtNameProduct;
     @Bind(R.id.edtPrice)
     EditText edtPrice;
-    @Bind(R.id.edtquar)
-    EditText edtQuarity;
+    /*@Bind(R.id.edtquar)
+    EditText edtQuarity;*/
     String path;
     String categoryName;
     ArrayAdapter<Category> adapter;
@@ -80,14 +80,14 @@ public class InsertProductFragment extends BaseFragment {
         spinner.setAdapter(adapter);
     }
 
-    @OnClick(R.id.btnChoose)
+    @OnClick(R.id.imgProduct)
     void selectimage(){
         Intent galleryIntent = new Intent(
                 Intent.ACTION_PICK,
                 android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(galleryIntent , RESULT_GALLERY );
     }
-    @OnClick(R.id.btnAdd)
+    @OnClick(R.id.btnInsert)
     void saveProducṭ̣̣̣̣̣̣(){
         Category category = (Category) spinner.getSelectedItem();
 
@@ -96,7 +96,7 @@ public class InsertProductFragment extends BaseFragment {
         product.setPrice(Float.parseFloat(edtPrice.getText().toString()));
         product.setPath(path);
         product.setCategories(category);
-        product.setQuantity(Integer.parseInt(edtQuarity.getText().toString()));
+        /*product.setQuantity(Integer.parseInt(edtQuarity.getText().toString()));*/
         ProductDao productDao=new ProductDao(getActivity());
         productDao.create(product);
 

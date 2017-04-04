@@ -7,6 +7,8 @@ import android.util.Log;
 
 import com.example.ribon.quanliquancafe.R;
 import com.example.ribon.quanliquancafe.model.Category;
+import com.example.ribon.quanliquancafe.model.Order;
+import com.example.ribon.quanliquancafe.model.OrderDetails;
 import com.example.ribon.quanliquancafe.model.Product;
 import com.example.ribon.quanliquancafe.model.Table;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
@@ -31,6 +33,10 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     private RuntimeExceptionDao<Category,Integer> categoryRuntimeDao=null;
     private Dao<Product,Integer> productDao=null;
     private RuntimeExceptionDao<Product,Integer> productRuntimeDao=null;
+    private Dao<Order,Integer> orderDao=null;
+    private RuntimeExceptionDao<Order,Integer> orderRuntimeDao=null;
+    private Dao<OrderDetails,Integer> orderDetailsDao=null;
+    private RuntimeExceptionDao<OrderDetails,Integer> orderDetailsRuntimeDao=null;
 
     public DatabaseHelper(Context context) {
         super(context,DATABASE_NAME,null,DATABASE_VERSION,R.raw.ormlite_config);
@@ -43,6 +49,8 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.createTable(connectionSource, Table.class);
             TableUtils.createTable(connectionSource, Category.class);
             TableUtils.createTable(connectionSource, Product.class);
+            TableUtils.createTable(connectionSource, Order.class);
+            TableUtils.createTable(connectionSource, OrderDetails.class);
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getSimpleName(),"Imosible crear la base de datos",e);
             throw new RuntimeException(e);
@@ -56,6 +64,8 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.dropTable(connectionSource,Table.class,true);
             TableUtils.dropTable(connectionSource,Category.class,true);
             TableUtils.dropTable(connectionSource,Product.class,true);
+            TableUtils.dropTable(connectionSource,Order.class,true);
+            TableUtils.dropTable(connectionSource,OrderDetails.class,true);
             onCreate(database,connectionSource);
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getSimpleName(),"Imosible crear la base de datos",e);
@@ -101,6 +111,31 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         }
         return productRuntimeDao;
     }
+    public Dao<Order, Integer> getOrderDao() throws SQLException {
+        if (orderDao==null)
+            orderDao=getDao(Order.class);
+        return orderDao;
+    }
+
+    public RuntimeExceptionDao<Order,Integer>getOrderRuntimeDao(){
+        if (orderRuntimeDao==null){
+            orderRuntimeDao=getRuntimeExceptionDao(Order.class);
+        }
+        return orderRuntimeDao;
+    }
+
+    public Dao<OrderDetails, Integer> getOrderDetailsDao() throws SQLException {
+        if (orderDetailsDao==null)
+            orderDetailsDao=getDao(OrderDetails.class);
+        return orderDetailsDao;
+    }
+
+    public RuntimeExceptionDao<OrderDetails,Integer>getOrderDetailsRuntimeDao(){
+        if (orderDetailsRuntimeDao==null){
+            orderDetailsRuntimeDao=getRuntimeExceptionDao(OrderDetails.class);
+        }
+        return orderDetailsRuntimeDao;
+    }
     @Override
     public void close() {
         super.close();
@@ -110,6 +145,10 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         categoryRuntimeDao=null;
         productDao=null;
         productRuntimeDao=null;
+        orderDao=null;
+        orderRuntimeDao=null;
+        orderDetailsDao=null;
+        orderDetailsRuntimeDao=null;
     }
 
 }

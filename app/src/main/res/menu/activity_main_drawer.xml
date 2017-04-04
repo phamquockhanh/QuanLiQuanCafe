@@ -13,7 +13,7 @@
         <item
             android:id="@+id/nav_fast_payment"
             android:icon="@drawable/ic_fast_payment"
-            android:title="Thanh toán nhanh" />
+            android:title="Quản lí sản phẩm" />
         <item
             android:id="@+id/ic_revenue_and_expenditure"
             android:icon="@drawable/ic_revenue_and_expenditure"
